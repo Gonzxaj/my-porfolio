@@ -1,0 +1,145 @@
+---
+    import Icon_Home from './icons/icon-home.astro';
+    import Icon_User from './icons/icon-user.astro';
+    import Icon_Project from './icons/icon-project.astro';
+    import Icon_Contact from './icons/icon-contact.astro'
+---
+
+<div class="container">
+    <a href="#" class="toggleBox">
+        <span class="icon"></span>
+    </a>
+    <ul class="navItems">
+        <li>
+            <a href="#">
+                <i><Icon_Home/></i>
+                <span>Inicio</span>
+            </a>
+        </li>
+        <li>
+            <a href="/about">
+                <i><Icon_User/></i>
+                <span>Sobre mi</span>
+            </a>
+        </li>
+        <li>
+            <a href="/project">
+                <i><Icon_Project/></i>
+                <span>Proyectos</span>
+            </a>
+        </li>
+        <li>
+            <a href="/contact">
+                <i><Icon_Contact/></i>
+                <span>Contacto</span>
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+<style>
+    .container {
+        top: 150px;
+        height: 70px;
+        width: 70px;
+        background-color: white;
+        border-radius: 50px;
+        position: relative;
+        transition: 0.4s ease;
+        z-index: 100;
+    }
+
+    .container.active{
+        height: 420px;
+    }
+
+    .toggleBox {
+        position: relative;
+        display: block;
+        height: 70px;
+        width: 70px;
+        border-radius: 50px;
+    }
+
+    .icon {
+        position: absolute;
+        height: 4px;
+        width: 35px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #161d2c;
+        border-radius: 50px;
+    }
+
+    .toggleBox.active .icon {
+        width: 0;
+    }
+
+    .icon::before,
+    .icon::after {
+        position: absolute;
+        content: '';
+        height: 4px;
+        width: 35px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #161d2c;
+        border-radius: 50px;
+        transition: 0.3s;
+    }
+
+    .icon::before {
+        top: 12px;
+    }
+
+    .icon::after {
+        bottom: 8px;
+    }
+
+    .toggleBox.active .icon::before {
+        width: 40px;
+        transform-origin: right;
+        transform: translate(-25px, 4px) rotate(45deg);
+    }
+
+    .toggleBox.active .icon::after {
+        width: 40px;
+        transform-origin: right;
+        transform: translate(-25px, -6px) rotate(-45deg);
+    }
+
+    .navItems{
+        width: 100%;
+    }
+    li{
+        list-style: none;
+    }
+    li a{
+        text-transform: uppercase;
+        color: #161d2c;
+    }
+
+    li a i{
+        position: relative;
+        display: block;
+        font-size: 18px;
+        padding: 25px 0;
+        width: 100%;
+        text-align: center;
+    }
+
+
+</style>
+
+<script>import { doSwap } from "astro/virtual-modules/transitions-events.js";
+
+    const toggleClick = document.querySelector('.toggleBox');
+    var containter = document.querySelector('.container');
+    toggleClick.addEventListener('click', (event) => {
+        event.preventDefault(); // Detener la acción predeterminada del enlace
+        toggleClick.classList.toggle('active');
+        containter.classList.toggle('active');
+    }); 
+</script>

@@ -1,0 +1,52 @@
+---
+// import
+import '@fontsource/yatra-one';
+import Header from '../components/Header.astro';
+import '@fontsource-variable/onest';
+import Navbar from '../components/Navbar.astro';
+import '@fortawesome/fontawesome-free';
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body>
+		
+		<Header/>
+		<Navbar/>
+		<slot />
+	</body>
+</html>
+
+<style is:global>
+
+	:root {
+		color-scheme: light dark;
+	}
+
+	html {
+		font-family: system-ui, sans-serif,'Yatra One','Onest Variable';
+	}
+
+	body{
+		background: linear-gradient(to right, #0c0c0c, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+		display: flex;
+		flex-direction: column;
+		min-height: 100vh;
+		overflow: hidden;
+	}
+
+</style>
