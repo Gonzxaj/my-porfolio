@@ -3,55 +3,62 @@
     import Icon_User from './icons/icon-user.astro';
     import Icon_Project from './icons/icon-project.astro';
     import Icon_Contact from './icons/icon-contact.astro'
+    import About from '../pages/About.astro';
+    import Contact from '../pages/Contact.astro';
+    
 ---
 
-<div class="container">
+<div class="container-navbar mx-5">
     <a href="#" class="toggleBox">
         <span class="icon"></span>
     </a>
     <ul class="navItems">
         <li>
-            <a href="#">
-                <i><Icon_Home/></i>
-                <span>Inicio</span>
+            <a href="#" class="navLink">
+                <i style="--i:1" ><Icon_Home/></i>
+                <span style="--g:1">Inicio</span>
             </a>
         </li>
         <li>
-            <a href="/about">
-                <i><Icon_User/></i>
-                <span>Sobre mi</span>
+            <a href="About" class="navLink">
+                <i style="--i:2"><Icon_User/></i>
+                <span style="--g:2">Sobre mi</span>
             </a>
         </li>
         <li>
-            <a href="/project">
-                <i><Icon_Project/></i>
-                <span>Proyectos</span>
+            <a href="/project" class="navLink">
+                <i style="--i:3"><Icon_Project/></i>
+                <span style="--g:3">Proyectos</span>
             </a>
         </li>
         <li>
-            <a href="/contact">
-                <i><Icon_Contact/></i>
-                <span>Contacto</span>
+            <a href="Contact" class="navLink">
+                <i style="--i:4"><Icon_Contact/></i>
+                <span style="--g:4">Contacto</span>
             </a>
         </li>
-        
     </ul>
 </div>
 
 <style>
-    .container {
-        top: 150px;
+
+    .container-navbar {
+        top: 30%;
         height: 70px;
         width: 70px;
         background-color: white;
         border-radius: 50px;
-        position: relative;
+        position: fixed;
         transition: 0.4s ease;
-        z-index: 100;
     }
 
-    .container.active{
+    .container-navbar.active{
         height: 420px;
+    }
+
+    .container-navbar.active .navItems{
+        visibility: visible;
+
     }
 
     .toggleBox {
@@ -110,12 +117,22 @@
         transform: translate(-25px, -6px) rotate(-45deg);
     }
 
-    .navItems{
-        width: 100%;
+    .navItems {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        visibility: hidden;
     }
+
+    .navLink {
+        display: flex;
+        align-items: center;
+    }
+
     li{
         list-style: none;
     }
+
     li a{
         text-transform: uppercase;
         color: #161d2c;
@@ -125,21 +142,56 @@
         position: relative;
         display: block;
         font-size: 18px;
-        padding: 25px 0;
+        padding: 35px 5px;
         width: 100%;
         text-align: center;
+        transform: scale(0);
     }
 
+
+
+    .container-navbar.active .navItems li a i{
+        transform: scale(1);
+        transition: 0.4s ease;
+        transition-delay: calc(0.08s * var(--i));
+    }
+
+    .container-navbar.active .navItems li:hover a i{
+        transition: 0.2s ease;
+        color: #26D07C;
+    }
+
+    li a span{
+        position: absolute;
+        color: #fff;
+        padding-left: 2rem;
+        font-weight: 500;
+        letter-spacing: 2px;
+        margin-left: 10px;
+    }
+
+    .container-navbar.active .navItems li a span{
+        transform: translateX(15px);
+        transition: 0.4s ease;
+        transition-delay: calc(0.08s * var(--g));
+    }
+
+    .container-navbar.active .navItems li:hover a span{
+        transform: translateX(30px);
+        transition: 0.2s ease;
+        color: #26D07C;
+    }
 
 </style>
 
 <script>import { doSwap } from "astro/virtual-modules/transitions-events.js";
 
     const toggleClick = document.querySelector('.toggleBox');
-    var containter = document.querySelector('.container');
+    var container_navbar = document.querySelector('.container-navbar');
     toggleClick.addEventListener('click', (event) => {
         event.preventDefault(); // Detener la acción predeterminada del enlace
         toggleClick.classList.toggle('active');
-        containter.classList.toggle('active');
+        container_navbar.classList.toggle('active');
     }); 
+
 </script>
