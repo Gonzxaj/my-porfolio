@@ -1,0 +1,1 @@
+bun dev & (cd Backend && bun run server.js)

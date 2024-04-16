@@ -1,11 +1,9 @@
 ---
 // import
 import '@fontsource/yatra-one';
-import Header from '../components/Header.astro';
 import '@fontsource-variable/onest';
 import Navbar from '../components/Navbar.astro';
 import '@fortawesome/fontawesome-free';
-import Contact from '../pages/Contact.astro';
 
 interface Props {
 	title: string;
@@ -25,11 +23,8 @@ const { title } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
-		
-		<!-- <Header/> -->
 		<Navbar/>
 		<slot />
-		<Contact/>
 	</body>
 </html>
 
