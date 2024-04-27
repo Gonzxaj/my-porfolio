@@ -83,7 +83,7 @@
                                 const name = document.getElementById('name').value;
                                 const email = document.getElementById('email').value;
                                 const tel = document.getElementById('tel').value;
-                                const res = await fetch("/api/sendEmail.json",{
+                                const res = await fetch("/api/sendEmail",{
                                     method:"POST",
                                     headers:{
                                         "Content-type" : "application/json"
