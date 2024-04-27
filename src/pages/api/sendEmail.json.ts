@@ -5,9 +5,6 @@ import { Resend } from "resend"
 
 const resend = new Resend(process.env.API_KEY_RESEND)
 
-
-
-
 export const POST: APIRoute = async({params, request})=> {
     
     
