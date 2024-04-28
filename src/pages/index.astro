@@ -1,14 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Icon from '../components/Icon.astro';
-import { Image } from 'astro:assets';
-import ProfilePicture from '../static/img/profilepicture.jpg';
 import Contact from '../components/Contact.astro';
+import Hero from '../components/Hero.astro';
 ---
 
 <Layout title="Mi porfolio">
 	<main>
-		<section id="home" class="w-full lg:w-[740px] mx-auto flex flex-row-reverse items-center py-44">
+		<!-- <section id="home" class="w-full lg:w-[740px] mx-auto flex flex-row-reverse items-center py-44">
 		  <div class="flex-shrink-0 ml-6">
 			<Image class=" w-64 h-64 my-picture" src={ProfilePicture} alt="gonza photo"/>
 		  </div>
@@ -17,20 +15,11 @@ import Contact from '../components/Contact.astro';
 			<h2 class="text-xl opacity-80">"Desarrollador joven de Argentina 🇦🇷, curioso y apasionado por el backend y frontend, 
 			  explorando con entusiasmo el fascinante mundo del desarrollo."</h2>
 		  </div>
-		</section>
+		</section> -->
+		<Hero/>
 		<Contact/>
 	  </main>
 </Layout>
 
-<style>
-.my-picture {
-  transition: transform .3s;
-  transform-origin: center;
-  border-radius: 8rem;
-}
-.my-picture:hover{
-transform: scale(1.1);
-box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.3); /* Ajusté la sombra blanca con transparencia */
-}
-</style>
+
 

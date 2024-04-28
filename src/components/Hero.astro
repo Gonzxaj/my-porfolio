@@ -1,0 +1,45 @@
+---
+import Icon from './Icon.astro';
+import { Image } from 'astro:assets';
+import ProfilePicture from '../static/img/profilepicture.jpg';
+---
+
+<section id="home" class="container mx-auto py-5 text-center">
+    <div class="row align-items-center">
+        <div class="col-lg-6 order-lg-2 img-div">
+            <Image class="img-fluid rounded-circle my-picture" src={ProfilePicture} alt="gonza photo" style="width: 16rem;"/>
+        </div>
+        <div class="col-lg-6 order-lg-1">
+            <h1 class="text-white text-5xl font-bold pb-2">Hola, soy Gonzalo</h1>
+            <h2 class="text-xl text-white-50">"Desarrollador joven de Argentina 🇦🇷, curioso y apasionado por el backend y frontend, explorando con entusiasmo el fascinante mundo del desarrollo."</h2>
+        </div>
+    </div>
+</section>
+
+
+
+<style>
+
+    @media (min-width: 992px) {
+        #home {
+            padding-left: 5rem;
+            padding-bottom: 1rem;
+        }
+    }
+
+    @media (max-width: 992px) {
+
+        .img-div{
+            display: flex;
+            justify-content: center;
+        }
+    }
+    .my-picture {
+        transition: transform .3s;
+    }
+    .my-picture:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.3);
+    }
+</style>
+    

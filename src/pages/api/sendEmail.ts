@@ -30,7 +30,7 @@ export const POST: APIRoute = async({params, request})=> {
     if (send.data) {
         return new Response(
             JSON.stringify({
-                message: send.data,
+                status:'send'
             }),
             {
                 status: 200,

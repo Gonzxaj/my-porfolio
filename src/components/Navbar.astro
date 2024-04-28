@@ -4,11 +4,10 @@
     import Icon_Project from './icons/icon-project.astro';
     import Icon_Contact from './icons/icon-contact.astro'
     import About from './About.astro';
-    import Contact from './Contact.astro';
     
 ---
 
-<div class="container-navbar mx-5 z-10">
+<div class="container-navbar mx-4 z-10">
     <a href="#" class="toggleBox">
         <span class="icon"></span>
     </a>
@@ -41,6 +40,13 @@
 </div>
 
 <style>
+    @media (max-width: 990px) {
+
+        .container-navbar{
+            top: 5%!important;
+        }
+    }
+
 
     .container-navbar {
         top: 30%;
@@ -120,8 +126,8 @@
     .navItems {
         display: flex;
         flex-direction: column;
-        align-items: center;
         visibility: hidden;
+        padding-inline-start: 21px !important;
     }
 
     .navLink {
@@ -136,6 +142,8 @@
     li a{
         text-transform: uppercase;
         color: #161d2c;
+
+
     }
 
     li a i{
@@ -181,6 +189,8 @@
         transition: 0.2s ease;
         color: #26D07C;
     }
+
+
 
 </style>
 
