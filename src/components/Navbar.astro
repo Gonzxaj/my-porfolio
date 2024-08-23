@@ -4,6 +4,14 @@
     import Icon_Project from './icons/icon-project.astro';
     import Icon_Contact from './icons/icon-contact.astro'
     import About from './About.astro';
+
+    import { getRelativeLocaleUrl } from 'astro:i18n';
+    import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+    const lang = getLangFromUrl(Astro.url);
+    const t = useTranslations(lang);
+    const {currentLocale}=Astro
+
     
 ---
 
@@ -15,25 +23,25 @@
         <li>
             <a href="#home" class="navLink">
                 <i style="--i:1" ><Icon_Home/></i>
-                <span style="--g:1">Inicio</span>
+                <span style="--g:1">{t('nav.home')}</span>
             </a>
         </li>
         <li>
-            <a href="About" class="navLink">
+            <a href={getRelativeLocaleUrl(currentLocale,'about')} class="navLink">
                 <i style="--i:2"><Icon_User/></i>
-                <span style="--g:2">Sobre mi</span>
+                <span style="--g:2">{t('nav.about')}</span>
             </a>
         </li>
         <li>
-            <a href="/project" class="navLink">
+            <a href={getRelativeLocaleUrl(currentLocale,'project')} class="navLink">
                 <i style="--i:3"><Icon_Project/></i>
-                <span style="--g:3">Proyectos</span>
+                <span style="--g:3">{t('nav.projects')}</span>
             </a>
         </li>
         <li>
             <a href="#section-contact" class="navLink">
                 <i style="--i:4"><Icon_Contact/></i>
-                <span style="--g:4">Contacto</span>
+                <span style="--g:4">{t('nav.contact')}</span>
             </a>
         </li>
     </ul>
@@ -199,7 +207,7 @@
     const toggleClick = document.querySelector('.toggleBox');
     var container_navbar = document.querySelector('.container-navbar');
     toggleClick.addEventListener('click', (event) => {
-        event.preventDefault(); // Detener la acción predeterminada del enlace
+        event.preventDefault();
         toggleClick.classList.toggle('active');
         container_navbar.classList.toggle('active');
     }); 

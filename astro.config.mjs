@@ -7,7 +7,6 @@ import robotsTxt from "astro-robots-txt";
 import sitemap from "@astrojs/sitemap";
 import compressor from "astro-compressor";
 
-import purgecss from "astro-purgecss";
 
 // https://astro.build/config
 export default defineConfig({
@@ -16,8 +15,16 @@ export default defineConfig({
   }), sitemap(), compressor({
     gzip: true,
     brotli: false
-  }), purgecss()],
+  }),],
   output: 'server',
   adapter: vercel(),
-  site: 'https://gonzalo-carranza.vercel.app'
+  site: 'https://gonzalo-carranza.vercel.app',
+  i18n:{
+    defaultLocale:'es',
+    locales:['es','en'],
+    routing:{
+      prefixDefaultLocale:false
+    }
+  },
+  
 });

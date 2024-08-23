@@ -50,57 +50,68 @@
                     </div>
     
                     <div class="p-6 flex flex-col justify-center">
-                        <div class="flex flex-col">
-                            <label for="name" class="hidden">Nombre completo</label>
-                            <input type="text" name="name" id="name" placeholder="Nombre completo" class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700  font-semibold focus:border-indigo-500 focus:outline-none">
-                        </div>
-    
-                        <div class="flex flex-col mt-2">
-                            <label for="email" class="hidden">Correo</label>
-                            <input type="email" name="email" id="email" placeholder="Correo" class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700  font-semibold focus:border-indigo-500 focus:outline-none">
-                        </div>
-    
-                        <div class="flex flex-col mt-2">
-                            <label for="tel" class="hidden">Numero de telefono</label>
-                            <input type="tel" name="tel" id="tel" placeholder="Numero de telefono" class="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700  font-semibold focus:border-indigo-500 focus:outline-none">
-                        </div>
-    
-                        <div class="flex flex-col mt-2">
-                            <label for="message" class="hidden">Mensaje:</label>
-                            <textarea name="message" id="message" placeholder="Escriba su mensaje aqui" cols="30" rows="10" class="w-100 mt-2 py-3 px-3 rounded-lg  dark:bg-gray-800 border  border-gray-400  dark:border-gray-700 font-semibold focus:border-indigo-500 "></textarea>
-                        </div>
-    
-                        <button type="submit" class="md:w-32 bg-indigo-600 hover:bg-blue-dark text-white font-bold py-3 px-6 rounded-lg mt-3 hover:bg-indigo-500 transition ease-in-out duration-300">
-                            Enviar
-                        </button>
+                        <form id="contact-form">
+                            <div class="flex flex-col">
+                                <label for="name" class="hidden">Nombre completo</label>
+                                <input type="text" required name="name" id="name" placeholder="Nombre completo" class="w-100 mt-2 py-3 px-3 rounded-lg  dark:bg-gray-800 border  border-gray-400  dark:border-gray-700 font-semibold focus:border-indigo-500 text-white">
+                            </div>
+                    
+                            <div class="flex flex-col mt-2">
+                                <label for="email" class="hidden">Correo</label>
+                                <input type="email"  required name="email" id="email" placeholder="Correo" class="w-100 mt-2 py-3 px-3 rounded-lg  dark:bg-gray-800 border  border-gray-400  dark:border-gray-700 font-semibold focus:border-indigo-500 text-white">
+                            </div>
+                    
+                            <div class="flex flex-col mt-2">
+                                <label for="tel" class="hidden">Numero de telefono</label>
+                                <input type="tel"  required name="tel" id="tel" placeholder="Numero de telefono" class="w-100 mt-2 py-3 px-3 rounded-lg  dark:bg-gray-800 border  border-gray-400  dark:border-gray-700 font-semibold focus:border-indigo-500 text-white">
+                            </div>
+                    
+                            <div class="flex flex-col mt-2">
+                                <label for="message" class="hidden">Mensaje:</label>
+                                <textarea name="message" required id="message" placeholder="Escriba su mensaje aquí" cols="30" rows="10" class="w-100 mt-2 py-3 px-3 rounded-lg  dark:bg-gray-800 border  border-gray-400  dark:border-gray-700 font-semibold focus:border-indigo-500 text-white"></textarea>
+                            </div>
+                    
+                            <button type="submit" class="md:w-32 bg-indigo-600 hover:bg-blue-dark text-white font-bold py-3 px-6 rounded-lg mt-3 hover:bg-indigo-500 transition ease-in-out duration-300">
+                                Enviar
+                            </button>
+                        </form>
                     </div>
 
-                    <script>
-                        document.querySelector("button")?.
-                        addEventListener("click",async()=>{
-                            try{
-                                const message = document.getElementById('message').value;
-                                const name = document.getElementById('name').value;
-                                const email = document.getElementById('email').value;
-                                const tel = document.getElementById('tel').value;
-                                const res = await fetch("/api/sendEmail",{
-                                    method:"POST",
-                                    headers:{
-                                        "Content-type" : "application/json"
+                    <script type="module">
+                        const form = document.getElementById('contact-form');
+                    
+                        form.addEventListener('submit', async (event) => {
+                            event.preventDefault();
+                    
+                            const name = document.getElementById('name').value;
+                            const email = document.getElementById('email').value;
+                            const tel = document.getElementById('tel').value;
+                            const message = document.getElementById('message').value;
+                    
+                            if (!name || !email || !tel || !message) {
+                                alert('Por favor, complete todos los campos.');
+                                return;
+                            }
+                    
+                            try {
+                                const res = await fetch("/api/sendEmail", {
+                                    method: "POST",
+                                    headers: {
+                                        "Content-type": "application/json"
                                     },
-                                    body:JSON.stringify({
-                                            from: 'Gonzalo <gonzalo@resend.dev>',
-                                            to: 'yonzalo1@gmail.com',
-                                            subject: 'Nuevo Mensaje de tu porfolio',
-                                            text: `Nombre: ${name}\nCorreo: ${email}\nTeléfono: ${tel}\nMensaje:${message}`,
+                                    body: JSON.stringify({
+                                        from: 'Gonzalo <gonzalo@resend.dev>',
+                                        to: 'yonzalo1@gmail.com',
+                                        subject: 'Nuevo Mensaje de tu porfolio',
+                                        text: `Nombre: ${name}\nCorreo: ${email}\nTeléfono: ${tel}\nMensaje:${message}`,
                                     }),
                                 });
                                 const data = await res.json();
-                                console.log(data)
-                            }catch(e){
-                                    console.error(e)
-                                }
-                        })
+                                console.log(data);
+                            } catch (e) {
+                                console.error(e);
+                            }
+                        });
                     </script>
                 </div>
             </div>
