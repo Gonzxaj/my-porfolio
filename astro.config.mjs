@@ -3,7 +3,7 @@ import tailwind from "@astrojs/tailwind";
 import icon from "astro-icon";
 import playformCompress from "@playform/compress";
 // import robotsTxt from "astro-robots-txt";
-// import sitemap from "@astrojs/sitemap";
+import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
   site: 'https://gonzalo-carranza.pages.dev',
@@ -11,7 +11,7 @@ export default defineConfig({
     tailwind(),
     icon(),
     playformCompress(),
-    // sitemap(),
+    sitemap(),
     // robotsTxt(),
   ],
   output: 'static',
