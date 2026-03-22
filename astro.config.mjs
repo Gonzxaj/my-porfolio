@@ -1,5 +1,4 @@
 import { defineConfig } from 'astro/config';
-import vercel from '@astrojs/vercel/serverless';
 import tailwind from "@astrojs/tailwind";
 import icon from "astro-icon";
 import playformCompress from "@playform/compress";
@@ -16,8 +15,7 @@ export default defineConfig({
     gzip: true,
     brotli: false
   }),],
-  output: 'server',
-  adapter: vercel(),
+  output: 'static',
   site: 'https://gonzalo-carranza.vercel.app',
   i18n:{
     defaultLocale:'es',

@@ -1,0 +1,92 @@
+---
+import { experience } from '../data/experience';
+
+interface Props {
+  lang?: 'es' | 'en';
+}
+
+const { lang = 'es' } = Astro.props;
+const jobs = experience[lang];
+
+const i18n = {
+  es: {
+    title: 'Experiencia',
+    viewResponsibilities: 'Ver responsabilidades',
+  },
+  en: {
+    title: 'Experience',
+    viewResponsibilities: 'View responsibilities',
+  },
+};
+
+const t = i18n[lang];
+---
+
+<section id="experiencia" class="container mx-auto py-16 px-4">
+    <h2 class="text-3xl font-bold text-white mb-12 text-center">{t.title}</h2>
+
+    <div class="relative max-w-3xl mx-auto">
+        <!-- Línea vertical -->
+        <div class="absolute left-6 top-0 bottom-0 w-0.5 bg-gray-700"></div>
+
+        <div class="flex flex-col gap-10">
+            {jobs.map((job: import('../data/experience').Job, index: number) => (
+                <div class="relative pl-16">
+                    <!-- Punto en la línea -->
+                    <div class={`absolute left-0 top-1 w-12 h-12 rounded-full flex items-center justify-center border-2 z-10 ${job.current ? 'bg-indigo-600 border-indigo-400' : 'bg-gray-800 border-gray-600'}`}>
+                        <span class="text-lg">{index === 0 ? '📡' : index === 1 ? '💻' : '⚙️'}</span>
+                    </div>
+
+                    <!-- Tarjeta -->
+                    <div class="bg-gray-800 rounded-xl p-6 border border-gray-700 hover:border-indigo-500 transition-colors duration-300">
+                        <!-- Header -->
+                        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-1">
+                            <h3 class="text-xl font-bold text-white">{job.role}</h3>
+                            <span class={`text-xs font-semibold px-2 py-1 rounded-full shrink-0 ${job.current ? 'bg-indigo-600 text-white' : 'bg-gray-700 text-gray-300'}`}>
+                                {job.period}
+                            </span>
+                        </div>
+
+                        <p class="text-indigo-400 font-semibold mb-1">{job.company} · {job.type}</p>
+                        <p class="text-gray-500 text-sm mb-3">📍 {job.location} · {job.modality}</p>
+
+                        <p class="text-gray-300 mb-4 text-sm">{job.summary}</p>
+
+                        <!-- Responsabilidades (colapsable con details) -->
+                        <details class="mb-4 group">
+                            <summary class="cursor-pointer text-sm text-indigo-400 hover:text-indigo-300 select-none list-none flex items-center gap-1">
+                                <svg class="w-4 h-4 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                </svg>
+                                {t.viewResponsibilities}
+                            </summary>
+                            <ul class="mt-3 space-y-1.5 pl-4 border-l border-gray-700">
+                                {job.responsibilities.map((r) => (
+                                    <li class="text-sm text-gray-400 before:content-['·'] before:mr-2 before:text-indigo-500">{r}</li>
+                                ))}
+                            </ul>
+                        </details>
+
+                        <!-- Tecnologías -->
+                        <div class="flex flex-wrap gap-2">
+                            {job.technologies.map((tech) => (
+                                <span class="flex items-center gap-1.5 text-xs bg-gray-700 text-gray-300 px-3 py-1.5 rounded-full">
+                                    {tech.icon && (
+                                        <img
+                                            src={`/icons/tech/${tech.icon}.svg`}
+                                            alt={tech.name}
+                                            width="14"
+                                            height="14"
+                                            class="w-3.5 h-3.5 object-contain"
+                                        />
+                                    )}
+                                    {tech.name}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </div>
+</section>
