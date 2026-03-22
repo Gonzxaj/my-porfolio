@@ -122,7 +122,7 @@ const es: Project[] = [
     technologies: [
       { name: "Django", icon: "django" },
       { name: "Django Templates", icon: "django" },
-      { name: "Django REST Framework", icon: "drf" },
+      { name: "DRF", icon: "drf" },
       { name: "Redis", icon: "redis" },
       { name: "Celery", icon: "celery" },
       { name: "JavaScript", icon: "javascript" },
@@ -165,7 +165,7 @@ const es: Project[] = [
     ],
     technologies: [
       { name: "Django", icon: "django" },
-      { name: "Django REST Framework", icon: "django" },
+      { name: "DRF", icon: "drf" },
       { name: "Redis", icon: "redis" },
       { name: "WebSockets", icon: "websocket" },
       { name: "JWT", icon: "jwt" },
@@ -278,7 +278,7 @@ const en: Project[] = [
     technologies: [
       { name: "Django", icon: "django" },
       { name: "Django Templates", icon: "django" },
-      { name: "Django REST Framework", icon: "drf" },
+      { name: "DRF", icon: "drf" },
       { name: "Redis", icon: "redis" },
       { name: "Celery", icon: "celery" },
       { name: "JavaScript", icon: "javascript" },
@@ -321,7 +321,7 @@ const en: Project[] = [
     ],
     technologies: [
       { name: "Django", icon: "django" },
-      { name: "Django REST Framework", icon: "django" },
+      { name: "DRF", icon: "drf" },
       { name: "Redis", icon: "redis" },
       { name: "WebSockets", icon: "websocket" },
       { name: "JWT", icon: "jwt" },

@@ -7,6 +7,7 @@ import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
   site: 'https://gonzalo-carranza.pages.dev',
+  trailingSlash: 'always',
   integrations: [
     tailwind(),
     icon(),

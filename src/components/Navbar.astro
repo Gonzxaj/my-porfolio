@@ -13,7 +13,7 @@ const otherLangUrl = lang === 'es' ? '/en' : '/';
 ---
 
 <!-- Desktop: floating pill (left side) -->
-<div class="container-navbar mx-4 z-10">
+<nav aria-label="Navegación principal" class="container-navbar mx-4 z-10">
     <a href="#" class="toggleBox" aria-label="Open navbar">
         <span class="icon"></span>
     </a>
@@ -45,7 +45,7 @@ const otherLangUrl = lang === 'es' ? '/en' : '/';
         <li>
             <a href={otherLangUrl} class="navLink">
                 <i style="--i:5">
-                    <img src={`/icons/flags/${otherLang === 'en' ? 'uk' : 'spain'}.png`} alt={otherLang} width="22" height="22" style="border-radius: 3px; object-fit: cover;" />
+                    <img src={`/icons/flags/${otherLang === 'en' ? 'uk' : 'spain'}.png`} alt={otherLang === 'en' ? 'Bandera del Reino Unido - cambiar a inglés' : 'Bandera de España - cambiar a español'} width="22" height="22" style="border-radius: 3px; object-fit: cover;" />
                 </i>
                 <span style="--g:5">{otherLang.toUpperCase()}</span>
             </a>
@@ -54,7 +54,7 @@ const otherLangUrl = lang === 'es' ? '/en' : '/';
 </div>
 
 <!-- Mobile: bottom navigation bar -->
-<nav class="mobile-nav">
+<nav aria-label="Navegación móvil" class="mobile-nav">
     <a href="#home" class="mobile-nav-item">
         <Icon_Home/>
         <span>{t('nav.home')}</span>
@@ -266,6 +266,12 @@ const otherLangUrl = lang === 'es' ? '/en' : '/';
     .mobile-nav-item:hover,
     .mobile-nav-item.active {
         color: #818cf8;
+    }
+
+    .mobile-nav-item:focus-visible {
+        outline: 2px solid #818cf8;
+        outline-offset: 2px;
+        border-radius: 8px;
     }
 </style>
 
