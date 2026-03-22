@@ -31,13 +31,13 @@ const otherLangUrl = lang === 'es' ? '/en' : '/';
             </a>
         </li>
         <li>
-            <a href="#proyectos" class="navLink">
+            <a href="#projects" class="navLink">
                 <i style="--i:3"><Icon_Project/></i>
                 <span style="--g:3">{t('nav.projects')}</span>
             </a>
         </li>
         <li>
-            <a href="#contacto" class="navLink">
+            <a href="#contact" class="navLink">
                 <i style="--i:4"><Icon_Contact/></i>
                 <span style="--g:4">{t('nav.contact')}</span>
             </a>
@@ -63,11 +63,11 @@ const otherLangUrl = lang === 'es' ? '/en' : '/';
         <Icon_User/>
         <span>{t('nav.about')}</span>
     </a>
-    <a href="#proyectos" class="mobile-nav-item">
+    <a href="#projects" class="mobile-nav-item">
         <Icon_Project/>
         <span>{t('nav.projects')}</span>
     </a>
-    <a href="#contacto" class="mobile-nav-item">
+    <a href="#contact" class="mobile-nav-item">
         <Icon_Contact/>
         <span>{t('nav.contact')}</span>
     </a>
@@ -286,7 +286,7 @@ const otherLangUrl = lang === 'es' ? '/en' : '/';
     });
 
     // Highlight active mobile nav item on scroll
-    const sectionIds = ['home', 'about', 'proyectos', 'contacto'];
+    const sectionIds = ['home', 'about', 'projects', 'contact'];
     const mobileItems = document.querySelectorAll('.mobile-nav-item');
 
     function updateActive() {
@@ -294,7 +294,7 @@ const otherLangUrl = lang === 'es' ? '/en' : '/';
 
         if (atBottom) {
             mobileItems.forEach(item => {
-                item.classList.toggle('active', item.getAttribute('href') === '#contacto');
+                item.classList.toggle('active', item.getAttribute('href') === '#contact');
             });
             return;
         }
