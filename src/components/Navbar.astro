@@ -1,18 +1,18 @@
 ---
-    import Icon_Home from './icons/icon-home.astro';
-    import Icon_User from './icons/icon-user.astro';
-    import Icon_Project from './icons/icon-project.astro';
-    import Icon_Contact from './icons/icon-contact.astro';
+import Icon_Home from './icons/icon-home.astro';
+import Icon_User from './icons/icon-user.astro';
+import Icon_Project from './icons/icon-project.astro';
+import Icon_Contact from './icons/icon-contact.astro';
 
-    import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
 
-    const lang = getLangFromUrl(Astro.url);
-    const t = useTranslations(lang);
-    const otherLang = lang === 'es' ? 'en' : 'es';
-    const otherLangUrl = lang === 'es' ? '/en' : '/';
-
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const otherLang = lang === 'es' ? 'en' : 'es';
+const otherLangUrl = lang === 'es' ? '/en' : '/';
 ---
 
+<!-- Desktop: floating pill (left side) -->
 <div class="container-navbar mx-4 z-10">
     <a href="#" class="toggleBox" aria-label="Open navbar">
         <span class="icon"></span>
@@ -20,7 +20,7 @@
     <ul class="navItems">
         <li>
             <a href="#home" class="navLink">
-                <i style="--i:1" ><Icon_Home/></i>
+                <i style="--i:1"><Icon_Home/></i>
                 <span style="--g:1">{t('nav.home')}</span>
             </a>
         </li>
@@ -45,10 +45,7 @@
         <li>
             <a href={otherLangUrl} class="navLink">
                 <i style="--i:5">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
-                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                    </svg>
+                    <img src={`/icons/flags/${otherLang === 'en' ? 'uk' : 'spain'}.png`} alt={otherLang} width="22" height="22" style="border-radius: 3px; object-fit: cover;" />
                 </i>
                 <span style="--g:5">{otherLang.toUpperCase()}</span>
             </a>
@@ -56,32 +53,55 @@
     </ul>
 </div>
 
-<style>
-    @media (max-width: 990px) {
+<!-- Mobile: bottom navigation bar -->
+<nav class="mobile-nav">
+    <a href="#home" class="mobile-nav-item">
+        <Icon_Home/>
+        <span>{t('nav.home')}</span>
+    </a>
+    <a href="#about" class="mobile-nav-item">
+        <Icon_User/>
+        <span>{t('nav.about')}</span>
+    </a>
+    <a href="#proyectos" class="mobile-nav-item">
+        <Icon_Project/>
+        <span>{t('nav.projects')}</span>
+    </a>
+    <a href="#contacto" class="mobile-nav-item">
+        <Icon_Contact/>
+        <span>{t('nav.contact')}</span>
+    </a>
+    <a href={otherLangUrl} class="mobile-nav-item">
+        <img src={`/icons/flags/${otherLang === 'en' ? 'uk' : 'spain'}.png`} alt={otherLang} width="24" height="24" style="border-radius: 4px; object-fit: cover;" />
+        <span>{otherLang.toUpperCase()}</span>
+    </a>
+</nav>
 
-        .container-navbar{
-            top: 5%!important;
+<style>
+/* ── Desktop floating pill ── */
+    .container-navbar {
+        display: none;
+    }
+
+    @media (min-width: 768px) {
+        .container-navbar {
+            display: block;
+            top: 30%;
+            height: 70px;
+            width: 70px;
+            background-color: white;
+            border-radius: 50px;
+            position: fixed;
+            transition: 0.4s ease;
         }
     }
 
-
-    .container-navbar {
-        top: 30%;
-        height: 70px;
-        width: 70px;
-        background-color: white;
-        border-radius: 50px;
-        position: fixed;
-        transition: 0.4s ease;
-    }
-
-    .container-navbar.active{
+    .container-navbar.active {
         height: 500px;
     }
 
-    .container-navbar.active .navItems{
+    .container-navbar.active .navItems {
         visibility: visible;
-
     }
 
     .toggleBox {
@@ -120,13 +140,8 @@
         transition: 0.3s;
     }
 
-    .icon::before {
-        top: 12px;
-    }
-
-    .icon::after {
-        bottom: 8px;
-    }
+    .icon::before { top: 12px; }
+    .icon::after  { bottom: 8px; }
 
     .toggleBox.active .icon::before {
         width: 40px;
@@ -152,18 +167,14 @@
         align-items: center;
     }
 
-    li{
-        list-style: none;
-    }
+    li { list-style: none; }
 
-    li a{
+    li a {
         text-transform: uppercase;
         color: #161d2c;
-
-
     }
 
-    li a i{
+    li a i {
         position: relative;
         display: block;
         font-size: 18px;
@@ -173,20 +184,18 @@
         transform: scale(0);
     }
 
-
-
-    .container-navbar.active .navItems li a i{
+    .container-navbar.active .navItems li a i {
         transform: scale(1);
         transition: 0.4s ease;
         transition-delay: calc(0.08s * var(--i));
     }
 
-    .container-navbar.active .navItems li:hover a i{
+    .container-navbar.active .navItems li:hover a i {
         transition: 0.2s ease;
         color: #26D07C;
     }
 
-    li a span{
+    li a span {
         position: absolute;
         color: #fff;
         padding-left: 2rem;
@@ -195,30 +204,111 @@
         margin-left: 10px;
     }
 
-    .container-navbar.active .navItems li a span{
+    .container-navbar.active .navItems li a span {
         transform: translateX(15px);
         transition: 0.4s ease;
         transition-delay: calc(0.08s * var(--g));
     }
 
-    .container-navbar.active .navItems li:hover a span{
+    .container-navbar.active .navItems li:hover a span {
         transform: translateX(30px);
         transition: 0.2s ease;
         color: #26D07C;
     }
 
+/* ── Mobile bottom bar ── */
+    .mobile-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background: rgba(15, 15, 25, 0.85);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 8px 0 calc(8px + env(safe-area-inset-bottom));
+        height: 64px;
+    }
 
+    @media (min-width: 768px) {
+        .mobile-nav {
+            display: none;
+        }
+    }
 
+    .mobile-nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+        color: #6b7280;
+        text-decoration: none;
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.03em;
+        padding: 4px 10px;
+        border-radius: 12px;
+        transition: color 0.2s ease;
+        flex: 1;
+    }
+
+    .mobile-nav-item svg,
+    .mobile-nav-item :global(svg) {
+        width: 22px;
+        height: 22px;
+        fill: currentColor;
+    }
+
+    .mobile-nav-item:hover,
+    .mobile-nav-item.active {
+        color: #818cf8;
+    }
 </style>
 
 <script>
-
     const toggleClick = document.querySelector('.toggleBox');
-    var container_navbar = document.querySelector('.container-navbar');
-    toggleClick.addEventListener('click', (event) => {
+    const container_navbar = document.querySelector('.container-navbar');
+
+    toggleClick?.addEventListener('click', (event) => {
         event.preventDefault();
         toggleClick.classList.toggle('active');
-        container_navbar.classList.toggle('active');
-    }); 
+        container_navbar?.classList.toggle('active');
+    });
 
+    // Highlight active mobile nav item on scroll
+    const sectionIds = ['home', 'about', 'proyectos', 'contacto'];
+    const mobileItems = document.querySelectorAll('.mobile-nav-item');
+
+    function updateActive() {
+        const atBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 10;
+
+        if (atBottom) {
+            mobileItems.forEach(item => {
+                item.classList.toggle('active', item.getAttribute('href') === '#contacto');
+            });
+            return;
+        }
+
+        const scrollY = window.scrollY + window.innerHeight / 3;
+        let current = sectionIds[0];
+
+        for (const id of sectionIds) {
+            const el = document.getElementById(id);
+            if (el && el.offsetTop <= scrollY) {
+                current = id;
+            }
+        }
+
+        mobileItems.forEach(item => {
+            const href = item.getAttribute('href');
+            item.classList.toggle('active', href === `#${current}`);
+        });
+    }
+
+    window.addEventListener('scroll', updateActive, { passive: true });
+    updateActive();
 </script>
