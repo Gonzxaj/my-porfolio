@@ -2,6 +2,7 @@
 import '@fontsource-variable/onest';
 import '../styles/global.css';
 import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
 
 interface Props {
   title: string;
@@ -25,12 +26,7 @@ const { currentLocale } = Astro;
   <body>
     <Navbar />
     <slot />
-    <footer class="text-center py-6 text-xs text-gray-400 border-t border-gray-800 mt-8 mb-16 md:mb-0">
-      © 2026 · {currentLocale === 'en' ? 'Built with' : 'Desarrollado con'}
-      <a href="https://astro.build/" target="_blank" rel="noopener noreferrer" class="text-gray-300 underline hover:text-white transition-colors">Astro 6.0.8</a>
-      · {currentLocale === 'en' ? 'Deployed on' : 'Desplegado en'}
-      <a href="https://pages.cloudflare.com/" target="_blank" rel="noopener noreferrer" class="text-gray-300 underline hover:text-white transition-colors">Cloudflare Pages</a>
-    </footer>
+    <Footer />
   </body>
 </html>
 
