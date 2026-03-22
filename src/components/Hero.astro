@@ -1,45 +1,84 @@
 ---
-import Icon from './Icon.astro';
 import { Image } from 'astro:assets';
-import ProfilePicture from '../static/img/profilepicture.jpg';
+import PersonalPicture from '../static/img/personal-picture.jpeg';
+
+interface Props {
+  lang?: 'es' | 'en';
+}
+
+const { lang = 'es' } = Astro.props;
+
+const i18n = {
+  es: {
+    greeting: 'Hola, soy',
+    name: 'Gonzalo',
+    role: 'Full Stack Developer',
+    roleHighlight: 'orientado al backend',
+    description: 'Construyo sistemas reales y escalables en producción. APIs robustas, procesamiento asincrónico e integraciones complejas con Django desde Argentina 🇦🇷',
+    ctaPrimary: 'Ver proyectos',
+    ctaSecondary: 'Contacto',
+  },
+  en: {
+    greeting: "Hi, I'm",
+    name: 'Gonzalo',
+    role: 'Full Stack Developer',
+    roleHighlight: 'backend-oriented',
+    description: 'I build real, scalable systems running in production. Robust APIs, async processing and complex integrations with Django from Argentina 🇦🇷',
+    ctaPrimary: 'View projects',
+    ctaSecondary: 'Contact',
+  },
+};
+
+const t = i18n[lang];
 ---
 
-<section id="home" class="container mx-auto py-5 text-center">
-    <div class="row align-items-center">
-        <div class="col-lg-6 order-lg-2 img-div">
-            <Image class="img-fluid rounded-circle my-picture" src={ProfilePicture} alt="gonza photo" style="width: 16rem;"/>
-        </div>
-        <div class="col-lg-6 order-lg-1">
-            <h1 class="text-white text-5xl font-bold pb-2">Hola, soy Gonzalo</h1>
-            <h2 class="text-xl text-white-50">"Desarrollador joven de Argentina 🇦🇷, curioso y apasionado por el backend y frontend, explorando con entusiasmo el fascinante mundo del desarrollo."</h2>
-        </div>
+<section id="home" class="container mx-auto px-4 py-20 sm:py-28 md:py-32">
+  <div class="max-w-5xl mx-auto flex flex-col-reverse md:flex-row items-center gap-12 md:gap-16">
+
+    <!-- Text -->
+    <div class="flex-1 text-center md:text-left">
+      <p class="text-indigo-400 font-semibold text-sm tracking-widest uppercase mb-3">
+        {t.greeting} {t.name}
+      </p>
+
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-2">
+        {t.role}
+      </h1>
+      <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-indigo-400 leading-tight mb-6">
+        {t.roleHighlight}
+      </h2>
+
+      <p class="text-gray-400 text-base sm:text-lg leading-relaxed max-w-xl mx-auto md:mx-0 mb-10">
+        {t.description}
+      </p>
+
+      <div class="flex flex-wrap gap-4 justify-center md:justify-start">
+        <a
+          href="#proyectos"
+          class="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl transition-colors duration-200 text-sm"
+        >
+          {t.ctaPrimary}
+        </a>
+        <a
+          href="#contacto"
+          class="px-6 py-3 bg-transparent border border-gray-600 hover:border-indigo-500 text-gray-300 hover:text-white font-semibold rounded-xl transition-colors duration-200 text-sm"
+        >
+          {t.ctaSecondary}
+        </a>
+      </div>
     </div>
+
+    <!-- Picture -->
+    <div class="shrink-0">
+      <div class="relative w-44 h-44 sm:w-52 sm:h-52 md:w-60 md:h-60">
+        <div class="absolute inset-0 rounded-full bg-indigo-500/20 blur-2xl"></div>
+        <Image
+          src={PersonalPicture}
+          alt="Gonzalo"
+          class="relative rounded-full w-full h-full object-cover border-2 border-indigo-500/40"
+        />
+      </div>
+    </div>
+
+  </div>
 </section>
-
-
-
-<style>
-
-    @media (min-width: 992px) {
-        #home {
-            padding-left: 5rem;
-            padding-bottom: 1rem;
-        }
-    }
-
-    @media (max-width: 992px) {
-
-        .img-div{
-            display: flex;
-            justify-content: center;
-        }
-    }
-    .my-picture {
-        transition: transform .3s;
-    }
-    .my-picture:hover {
-        transform: scale(1.1);
-        box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.3);
-    }
-</style>
-    

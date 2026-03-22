@@ -1,1 +1,103 @@
-<h1>HOLA</h1>
+---
+interface Props {
+  lang?: 'es' | 'en';
+}
+
+const { lang = 'es' } = Astro.props;
+
+const i18n = {
+  es: {
+    title: 'Sobre mí',
+    paragraphs: [
+      'Empecé en el mundo de la tecnología desde una base técnica, cursando el secundario con especialidad en informática, donde trabajé tanto en hardware como en desarrollo de software, creando pequeñas aplicaciones, webs y proyectos con robótica.',
+      'Durante esa etapa comencé a profundizar en programación con C++, participando en olimpíadas de informática a nivel provincial y nacional, lo que marcó mi primer acercamiento serio al desarrollo y definió el camino que seguiría después.',
+      'Luego inicié la carrera de Analista en Computación en la UNRC. Si bien no pude completarla por motivos personales, nunca dejé de formarme de manera autodidacta y continuar desarrollando proyectos.',
+      'En 2023 comencé mi etapa profesional como desarrollador, trabajando principalmente con Python y enfrentando desafíos reales en proyectos productivos. Actualmente me desempeño como Backend Developer, construyendo APIs, sistemas escalables y procesos asincrónicos en producción.',
+      'Aunque mi foco principal es el backend, también tengo experiencia en frontend (Vue y JavaScript), lo que me permite entender el producto completo y trabajar de forma full stack cuando es necesario.',
+      'Me motiva resolver problemas complejos y seguir aprendiendo constantemente. Investigo nuevas tecnologías, experimento y me adapto a distintas herramientas según el desafío.',
+      'Actualmente trabajo principalmente con Python/Django, pero no me limito a un framework específico. Estoy abierto a desarrollar backend con distintas tecnologías, integrar servicios externos, IA y cualquier solución que el proyecto requiera.',
+      'Hoy continúo mi formación como Técnico Superior en Desarrollo de Software en ITEC Río Cuarto, combinando estudio, trabajo y desarrollo de proyectos propios.',
+    ],
+    readMore: 'Leer más',
+    readLess: 'Leer menos',
+    focusTitle: 'Foco actual',
+    focus: [
+      'Desarrollo backend con Python (Django / APIs)',
+      'Procesamiento asincrónico (Celery, Redis)',
+      'Diseño de sistemas y lógica de negocio',
+      'Frontend con Vue (cuando se necesita)',
+      'Integraciones con APIs externas e IA',
+      'Deploys en producción (Docker, Nginx, Cloudflare)',
+    ],
+  },
+  en: {
+    title: 'About me',
+    paragraphs: [
+      'I entered the tech world from a technical background, attending high school with a specialization in computer science, where I worked with both hardware and software — building small applications, websites, and robotics projects.',
+      'During that time I started going deeper into programming with C++, competing in informatics olympiads at the provincial and national level. That was my first serious encounter with software development and it defined the path I would follow.',
+      'I later enrolled in the Computer Analyst degree at UNRC. Although I was unable to complete it for personal reasons, I never stopped learning on my own and kept building projects.',
+      'In 2023 I started my professional career as a developer, working primarily with Python and tackling real challenges in production projects. Today I work as a Backend Developer, building APIs, scalable systems, and async processes running in production.',
+      'While my main focus is backend, I also have experience in frontend development (Vue and JavaScript), which allows me to understand the full product and work across the stack when needed.',
+      'I am motivated by solving complex problems and continuously learning. I research new technologies, experiment, and adapt to different tools depending on the challenge.',
+      "I currently work mainly with Python/Django, but I'm not tied to a specific framework. I'm open to building backend systems with different technologies, integrating external services, AI, or whatever the project requires.",
+      'Today I continue my education as a Software Development Technician at ITEC Río Cuarto, combining study, work, and personal projects.',
+    ],
+    readMore: 'Read more',
+    readLess: 'Read less',
+    focusTitle: 'Current focus',
+    focus: [
+      'Backend development with Python (Django / APIs)',
+      'Asynchronous processing (Celery, Redis)',
+      'System design and business logic',
+      'Frontend with Vue (when needed)',
+      'Integrations with external APIs and AI',
+      'Production deployments (Docker, Nginx, Cloudflare)',
+    ],
+  },
+};
+
+const t = i18n[lang];
+---
+
+<section id="about" class="container mx-auto px-4 py-16">
+  <div class="max-w-3xl mx-auto">
+    <h2 class="text-3xl font-bold text-white mb-10 text-center">{t.title}</h2>
+
+    <div class="bg-gray-800/50 border border-gray-700 rounded-2xl p-6 sm:p-8 flex flex-col gap-6">
+
+      <div class="space-y-4">
+        {t.paragraphs.slice(0, 2).map((p: string) => (
+          <p class="text-gray-300 leading-relaxed">{p}</p>
+        ))}
+
+        <details class="group">
+          <summary class="cursor-pointer list-none text-sm text-indigo-400 hover:text-indigo-300 flex items-center gap-1 select-none w-fit">
+            <svg class="w-4 h-4 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+            <span class="group-open:hidden">{t.readMore}</span>
+            <span class="hidden group-open:inline">{t.readLess}</span>
+          </summary>
+          <div class="mt-4 space-y-4">
+            {t.paragraphs.slice(2).map((p: string) => (
+              <p class="text-gray-300 leading-relaxed">{p}</p>
+            ))}
+          </div>
+        </details>
+      </div>
+
+      <div class="border-t border-gray-700 pt-6">
+        <p class="text-indigo-400 font-semibold text-sm uppercase tracking-widest mb-4">{t.focusTitle}</p>
+        <ul class="grid sm:grid-cols-2 gap-2">
+          {t.focus.map((item: string) => (
+            <li class="flex items-start gap-2 text-sm text-gray-300">
+              <span class="text-indigo-500 mt-0.5 shrink-0">▹</span>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>

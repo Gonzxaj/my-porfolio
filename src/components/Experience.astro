@@ -27,30 +27,30 @@ const t = i18n[lang];
 
     <div class="relative max-w-3xl mx-auto">
         <!-- Línea vertical -->
-        <div class="absolute left-6 top-0 bottom-0 w-0.5 bg-gray-700"></div>
+        <div class="absolute left-5 sm:left-6 top-0 bottom-0 w-0.5 bg-gray-700"></div>
 
-        <div class="flex flex-col gap-10">
+        <div class="flex flex-col gap-8 sm:gap-10">
             {jobs.map((job: import('../data/experience').Job, index: number) => (
-                <div class="relative pl-16">
+                <div class="relative pl-14 sm:pl-16">
                     <!-- Punto en la línea -->
-                    <div class={`absolute left-0 top-1 w-12 h-12 rounded-full flex items-center justify-center border-2 z-10 ${job.current ? 'bg-indigo-600 border-indigo-400' : 'bg-gray-800 border-gray-600'}`}>
-                        <span class="text-lg">{index === 0 ? '📡' : index === 1 ? '💻' : '⚙️'}</span>
+                    <div class={`absolute left-0 top-1 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center border-2 z-10 ${job.current ? 'bg-indigo-600 border-indigo-400' : 'bg-gray-800 border-gray-600'}`}>
+                        <span class="text-base sm:text-lg">{index === 0 ? '📡' : index === 1 ? '💻' : '⚙️'}</span>
                     </div>
 
                     <!-- Tarjeta -->
-                    <div class="bg-gray-800 rounded-xl p-6 border border-gray-700 hover:border-indigo-500 transition-colors duration-300">
+                    <div class="bg-gray-800 rounded-xl p-4 sm:p-6 border border-gray-700 hover:border-indigo-500 transition-colors duration-300 overflow-hidden">
                         <!-- Header -->
                         <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-1">
-                            <h3 class="text-xl font-bold text-white">{job.role}</h3>
-                            <span class={`text-xs font-semibold px-2 py-1 rounded-full shrink-0 ${job.current ? 'bg-indigo-600 text-white' : 'bg-gray-700 text-gray-300'}`}>
+                            <h3 class="text-lg sm:text-xl font-bold text-white leading-snug">{job.role}</h3>
+                            <span class={`self-start text-xs font-semibold px-2 py-1 rounded-full shrink-0 ${job.current ? 'bg-indigo-600 text-white' : 'bg-gray-700 text-gray-300'}`}>
                                 {job.period}
                             </span>
                         </div>
 
-                        <p class="text-indigo-400 font-semibold mb-1">{job.company} · {job.type}</p>
-                        <p class="text-gray-500 text-sm mb-3">📍 {job.location} · {job.modality}</p>
+                        <p class="text-indigo-400 font-semibold mb-1 text-sm sm:text-base">{job.company} · {job.type}</p>
+                        <p class="text-gray-500 text-xs sm:text-sm mb-3">📍 {job.location} · {job.modality}</p>
 
-                        <p class="text-gray-300 mb-4 text-sm">{job.summary}</p>
+                        <p class="text-gray-300 mb-4 text-sm leading-relaxed">{job.summary}</p>
 
                         <!-- Responsabilidades (colapsable con details) -->
                         <details class="mb-4 group">

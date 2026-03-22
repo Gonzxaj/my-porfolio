@@ -2,17 +2,13 @@
     import Icon_Home from './icons/icon-home.astro';
     import Icon_User from './icons/icon-user.astro';
     import Icon_Project from './icons/icon-project.astro';
-    import Icon_Contact from './icons/icon-contact.astro'
-    import About from './About.astro';
+    import Icon_Contact from './icons/icon-contact.astro';
 
-    import { getRelativeLocaleUrl } from 'astro:i18n';
     import { getLangFromUrl, useTranslations } from '../i18n/utils';
 
     const lang = getLangFromUrl(Astro.url);
     const t = useTranslations(lang);
-    const {currentLocale}=Astro
 
-    
 ---
 
 <div class="container-navbar mx-4 z-10">
@@ -27,19 +23,19 @@
             </a>
         </li>
         <li>
-            <a href={getRelativeLocaleUrl(currentLocale,'about')} class="navLink">
+            <a href="#about" class="navLink">
                 <i style="--i:2"><Icon_User/></i>
                 <span style="--g:2">{t('nav.about')}</span>
             </a>
         </li>
         <li>
-            <a href={getRelativeLocaleUrl(currentLocale,'project')} class="navLink">
+            <a href="#proyectos" class="navLink">
                 <i style="--i:3"><Icon_Project/></i>
                 <span style="--g:3">{t('nav.projects')}</span>
             </a>
         </li>
         <li>
-            <a href="#section-contact" class="navLink">
+            <a href="#contacto" class="navLink">
                 <i style="--i:4"><Icon_Contact/></i>
                 <span style="--g:4">{t('nav.contact')}</span>
             </a>

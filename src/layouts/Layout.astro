@@ -1,53 +1,46 @@
 ---
-// import
-import '@fontsource/yatra-one';
 import '@fontsource-variable/onest';
 import Navbar from '../components/Navbar.astro';
-import '@fortawesome/fontawesome-free';
-import 'bootstrap/dist/css/bootstrap.min.css'
+
 interface Props {
-	title: string;
+  title: string;
 }
 
 const { title } = Astro.props;
-
-const {currentLocale}=Astro
+const { currentLocale } = Astro;
 ---
 
 <!doctype html>
 <html lang={currentLocale}>
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="sitemap" href="/sitemap-index.xml" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<navbar>
-			<Navbar/>
-		</navbar>
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Gonzalo — Full Stack Developer especializado en sistemas escalables con Django" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <Navbar />
+    <slot />
+  </body>
 </html>
 
 <style is:global>
+  :root {
+    color-scheme: dark;
+  }
 
-	:root {
-		color-scheme: light dark;
-	}
+  html {
+    font-family: 'Onest Variable', system-ui, sans-serif;
+    scroll-behavior: smooth;
+  }
 
-	html {
-		font-family: system-ui, sans-serif,'Yatra One','Onest Variable';
-	}
-
-	body{
-		background: linear-gradient(to right, #0c0c0c, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-		display: flex;
-		flex-direction: column;
-		min-height: 100vh;
-	}
-
+  body {
+    background: #080810;
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: #f1f5f9;
+  }
 </style>
