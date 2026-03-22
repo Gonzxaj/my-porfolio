@@ -2,6 +2,7 @@
 /// <reference types="astro/client" />
 
 interface ImportMetaEnv {
+  readonly SITE_URL: string;
   readonly CONTACT_EMAIL: string;
   readonly CONTACT_LOCATION: string;
   readonly GITHUB_URL: string;
