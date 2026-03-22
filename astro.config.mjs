@@ -1,12 +1,14 @@
 import { defineConfig } from 'astro/config';
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from "@tailwindcss/vite";
 import icon from "astro-icon";
 import playformCompress from "@playform/compress";
 
 export default defineConfig({
   site: 'https://gonzalo-carranza.pages.dev',
+  vite: {
+    plugins: [tailwindcss()],
+  },
   integrations: [
-    tailwind(),
     icon(),
     playformCompress(),
   ],
