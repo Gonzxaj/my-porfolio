@@ -2,27 +2,29 @@ import { defineConfig } from 'astro/config';
 import tailwind from "@astrojs/tailwind";
 import icon from "astro-icon";
 import playformCompress from "@playform/compress";
-import robotsTxt from "astro-robots-txt";
-import sitemap from "@astrojs/sitemap";
-import compressor from "astro-compressor";
+// import robotsTxt from "astro-robots-txt";   // requiere `site`
+// import sitemap from "@astrojs/sitemap";      // requiere `site`
+// import compressor from "astro-compressor";
 
+// TODO: cuando tengas la URL final de Cloudflare Pages, descomentar:
+//   - sitemap()
+//   - robotsTxt()
+//   - compressor()
+//   - site: 'https://tu-dominio.pages.dev'
 
-// https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind(), icon(), playformCompress(), robotsTxt({
-    // host : 'https://gonzalo-carranza.vercel.app',
-  }), sitemap(), compressor({
-    gzip: true,
-    brotli: false
-  }),],
+  integrations: [
+    tailwind(),
+    icon(),
+    playformCompress(),
+  ],
   output: 'static',
-  site: 'https://gonzalo-carranza.vercel.app',
-  i18n:{
-    defaultLocale:'es',
-    locales:['es','en'],
-    routing:{
-      prefixDefaultLocale:false
+  // site: 'https://tu-dominio.pages.dev',
+  i18n: {
+    defaultLocale: 'es',
+    locales: ['es', 'en'],
+    routing: {
+      prefixDefaultLocale: false
     }
   },
-  
 });
