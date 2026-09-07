@@ -9,7 +9,24 @@ import { getLangFromUrl, useTranslations } from '../i18n/utils';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const otherLang = lang === 'es' ? 'en' : 'es';
-const otherLangUrl = lang === 'es' ? '/en' : '/';
+
+function getOtherLangUrl(pathname: string, currentLang: 'es' | 'en'): string {
+    const esProject = pathname.match(/^\/proyectos\/([^/]+)\/?$/);
+    if (esProject) return `/en/projects/${esProject[1]}`;
+
+    const enProject = pathname.match(/^\/en\/projects\/([^/]+)\/?$/);
+    if (enProject) return `/proyectos/${enProject[1]}`;
+
+    const esExperience = pathname.match(/^\/experiencia\/([^/]+)\/?$/);
+    if (esExperience) return `/en/experience/${esExperience[1]}`;
+
+    const enExperience = pathname.match(/^\/en\/experience\/([^/]+)\/?$/);
+    if (enExperience) return `/experiencia/${enExperience[1]}`;
+
+    return currentLang === 'es' ? '/en' : '/';
+}
+
+const otherLangUrl = getOtherLangUrl(Astro.url.pathname, lang);
 ---
 
 <!-- Desktop: floating pill (left side) -->

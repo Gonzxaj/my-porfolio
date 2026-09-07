@@ -1,0 +1,239 @@
+---
+import type { PersonalProject } from '../data/personalProjects';
+
+interface Props {
+  project: PersonalProject;
+  lang?: 'es' | 'en';
+  backHref: string;
+}
+
+const { project, lang = 'es', backHref } = Astro.props;
+
+const i18n = {
+  es: {
+    back: 'Volver',
+    overview: 'Qué es',
+    highlights: 'Highlights',
+    architecture: 'Arquitectura',
+    quickStart: 'Cómo correrlo',
+    ports: 'Puertos',
+    volumes: 'Volúmenes',
+    envVars: 'Variables de entorno',
+    port: 'Puerto',
+    protocol: 'Protocolo',
+    purpose: 'Uso',
+    path: 'Path',
+    name: 'Variable',
+    default: 'Default',
+  },
+  en: {
+    back: 'Back',
+    overview: 'Overview',
+    highlights: 'Highlights',
+    architecture: 'Architecture',
+    quickStart: 'Quick start',
+    ports: 'Ports',
+    volumes: 'Volumes',
+    envVars: 'Environment variables',
+    port: 'Port',
+    protocol: 'Protocol',
+    purpose: 'Purpose',
+    path: 'Path',
+    name: 'Variable',
+    default: 'Default',
+  },
+};
+
+const t = i18n[lang];
+
+const linkIcons: Record<string, string> = {
+  github: `<svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>`,
+  dockerhub: `<svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M13.98 11.08h2.12a.19.19 0 0 0 .19-.19V9.01a.19.19 0 0 0-.19-.19h-2.12a.18.18 0 0 0-.18.18v1.9c0 .1.08.18.18.18m-2.95-5.43h2.12a.19.19 0 0 0 .18-.19V3.57a.19.19 0 0 0-.18-.18h-2.12a.18.18 0 0 0-.19.18v1.9c0 .1.09.18.19.18m0 2.71h2.12a.19.19 0 0 0 .18-.18V6.29a.19.19 0 0 0-.18-.18h-2.12a.18.18 0 0 0-.19.18v1.89c0 .1.09.18.19.18m-2.93 0h2.12a.19.19 0 0 0 .18-.18V6.29a.18.18 0 0 0-.18-.18H8.1a.18.18 0 0 0-.18.18v1.89c0 .1.08.18.18.18m-2.96 0h2.11a.19.19 0 0 0 .19-.18V6.29a.18.18 0 0 0-.19-.18H5.14a.19.19 0 0 0-.19.18v1.89c0 .1.08.18.19.18m5.89 2.72h2.12a.19.19 0 0 0 .18-.19V9.01a.19.19 0 0 0-.18-.19h-2.12a.18.18 0 0 0-.19.18v1.9c0 .1.09.18.19.18m-2.93 0h2.12a.18.18 0 0 0 .18-.19V9.01a.18.18 0 0 0-.18-.19H8.1a.18.18 0 0 0-.18.18v1.9c0 .1.08.18.18.18m-2.96 0h2.11a.18.18 0 0 0 .19-.19V9.01a.18.18 0 0 0-.18-.19H5.14a.19.19 0 0 0-.19.19v1.88c0 .1.08.19.19.19m-2.92 0h2.12a.18.18 0 0 0 .18-.19V9.01a.18.18 0 0 0-.18-.19H2.22a.18.18 0 0 0-.19.18v1.9c0 .1.08.18.19.18m21.54-1.19c-.06-.05-.67-.51-1.95-.51-.34 0-.68.03-1.01.09a3.77 3.77 0 0 0-1.72-2.57l-.34-.2-.23.33a4.6 4.6 0 0 0-.6 1.43c-.24.97-.1 1.88.4 2.66a4.7 4.7 0 0 1-1.75.42H.76a.75.75 0 0 0-.76.75 11.38 11.38 0 0 0 .7 4.06 6.03 6.03 0 0 0 2.4 3.12c1.18.73 3.1 1.14 5.28 1.14.98 0 1.96-.08 2.93-.26a12.25 12.25 0 0 0 3.82-1.4 10.5 10.5 0 0 0 2.61-2.13c1.25-1.42 2-3 2.55-4.4h.23c1.37 0 2.21-.55 2.68-1 .3-.3.55-.66.7-1.06l.1-.28Z"/></svg>`,
+  external: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H18m0 0v4.5M18 6l-8.25 8.25M6 10.5v6.75A1.75 1.75 0 007.75 19h6.75"/></svg>`,
+};
+---
+
+<section class="container mx-auto px-4 py-14 sm:py-20">
+  <div class="max-w-3xl mx-auto">
+    <a href={backHref} class="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-indigo-300 transition-colors mb-8">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+      </svg>
+      {t.back}
+    </a>
+
+    <div class="flex items-start gap-5 mb-6">
+      {project.logo && (
+        <img src={project.logo} alt="" width="128" height="128" class="w-24 h-24 sm:w-32 sm:h-32 object-contain shrink-0" />
+      )}
+      <div class="flex-1 min-w-0">
+        <span class="inline-block text-xs font-semibold px-2.5 py-1 rounded-full bg-indigo-500/15 text-indigo-300 border border-indigo-500/30 mb-4">
+          {project.status}
+        </span>
+
+        <h1 class="text-3xl sm:text-4xl font-bold text-white leading-tight mb-3">{project.title}</h1>
+        <p class="text-gray-400 text-base sm:text-lg leading-relaxed">{project.tagline}</p>
+      </div>
+    </div>
+
+    {project.links.length > 0 && (
+      <div class="flex flex-wrap gap-3 mb-8">
+        {project.links.map((link) => (
+          <a
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 border border-gray-700 hover:border-indigo-500 text-gray-200 hover:text-white px-4 py-2.5 rounded-xl transition-all duration-200 text-sm font-medium"
+          >
+            <Fragment set:html={linkIcons[link.kind]} />
+            {link.label}
+          </a>
+        ))}
+      </div>
+    )}
+
+    <div class="flex flex-wrap gap-2 mb-10 pb-10 border-b border-gray-800">
+      {project.technologies.map((tech) => (
+        <span class="flex items-center gap-1.5 text-xs bg-gray-800 text-gray-300 px-3 py-1.5 rounded-full border border-gray-700">
+          {tech.icon && (
+            <img src={`/icons/tech/${tech.icon}.svg`} alt={tech.name} width="14" height="14" class="w-3.5 h-3.5 object-contain" />
+          )}
+          {tech.name}
+        </span>
+      ))}
+    </div>
+
+    <div class="flex flex-col gap-10">
+      <div>
+        <h2 class="text-xl font-bold text-white mb-4">{t.overview}</h2>
+        <div class="flex flex-col gap-4">
+          {project.description.map((p) => (
+            <p class="text-gray-300 text-sm sm:text-base leading-relaxed">{p}</p>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <h2 class="text-xl font-bold text-white mb-4">{t.highlights}</h2>
+        <ul class="flex flex-col gap-2.5">
+          {project.highlights.map((h) => (
+            <li class="flex items-start gap-2.5 text-gray-300 text-sm sm:text-base leading-relaxed">
+              <svg class="w-5 h-5 shrink-0 text-indigo-400 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              {h}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {project.architecture && (
+        <div>
+          <h2 class="text-xl font-bold text-white mb-4">{t.architecture}</h2>
+          <ul class="flex flex-col gap-2 pl-4 border-l border-gray-700">
+            {project.architecture.map((a) => (
+              <li class="text-gray-300 text-sm sm:text-base leading-relaxed before:content-['·'] before:mr-2 before:text-indigo-400">{a}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {project.quickStart && (
+        <div>
+          <h2 class="text-xl font-bold text-white mb-4">{t.quickStart}</h2>
+          <div class="flex flex-col gap-4">
+            {project.quickStart.map((block) => (
+              <div class="rounded-xl border border-gray-700 overflow-hidden">
+                <div class="bg-gray-800 px-4 py-2 text-xs font-semibold text-gray-400 border-b border-gray-700">
+                  {block.label}
+                </div>
+                <pre class="bg-[#0c0c14] p-4 overflow-x-auto text-xs sm:text-sm leading-relaxed text-gray-200"><code>{block.code}</code></pre>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {project.ports && (
+        <div>
+          <h2 class="text-xl font-bold text-white mb-4">{t.ports}</h2>
+          <div class="overflow-x-auto rounded-xl border border-gray-700">
+            <table class="w-full text-sm text-left">
+              <thead class="bg-gray-800 text-gray-400 text-xs uppercase tracking-wide">
+                <tr>
+                  <th class="px-4 py-3 font-semibold">{t.port}</th>
+                  <th class="px-4 py-3 font-semibold">{t.protocol}</th>
+                  <th class="px-4 py-3 font-semibold">{t.purpose}</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-800">
+                {project.ports.map((row) => (
+                  <tr class="text-gray-300">
+                    <td class="px-4 py-3 font-mono text-indigo-300 whitespace-nowrap">{row.port}</td>
+                    <td class="px-4 py-3 whitespace-nowrap">{row.protocol}</td>
+                    <td class="px-4 py-3">{row.purpose}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      {project.volumes && (
+        <div>
+          <h2 class="text-xl font-bold text-white mb-4">{t.volumes}</h2>
+          <div class="overflow-x-auto rounded-xl border border-gray-700">
+            <table class="w-full text-sm text-left">
+              <thead class="bg-gray-800 text-gray-400 text-xs uppercase tracking-wide">
+                <tr>
+                  <th class="px-4 py-3 font-semibold">{t.path}</th>
+                  <th class="px-4 py-3 font-semibold">{t.purpose}</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-800">
+                {project.volumes.map((row) => (
+                  <tr class="text-gray-300">
+                    <td class="px-4 py-3 font-mono text-indigo-300 whitespace-nowrap align-top">{row.path}</td>
+                    <td class="px-4 py-3">{row.purpose}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      {project.envVars && (
+        <div>
+          <h2 class="text-xl font-bold text-white mb-4">{t.envVars}</h2>
+          <div class="rounded-xl border border-gray-700 overflow-hidden">
+            <table class="w-full text-sm text-left table-fixed">
+              <colgroup>
+                <col class="w-[30%]" />
+                <col class="w-[25%]" />
+                <col class="w-[45%]" />
+              </colgroup>
+              <thead class="bg-gray-800 text-gray-400 text-xs uppercase tracking-wide">
+                <tr>
+                  <th class="px-4 py-3 font-semibold">{t.name}</th>
+                  <th class="px-4 py-3 font-semibold">{t.default}</th>
+                  <th class="px-4 py-3 font-semibold">{t.purpose}</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-800">
+                {project.envVars.map((row) => (
+                  <tr class="text-gray-300">
+                    <td class="px-4 py-3 font-mono text-indigo-300 text-xs sm:text-sm break-words align-top">{row.name}</td>
+                    <td class="px-4 py-3 font-mono text-xs text-gray-400 break-words align-top">{row.value}</td>
+                    <td class="px-4 py-3 break-words">{row.purpose}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+    </div>
+  </div>
+</section>

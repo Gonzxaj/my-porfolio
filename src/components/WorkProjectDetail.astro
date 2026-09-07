@@ -1,0 +1,141 @@
+---
+import type { Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+  lang?: 'es' | 'en';
+  backHref: string;
+}
+
+const { project, lang = 'es', backHref } = Astro.props;
+
+const i18n = {
+  es: {
+    back: 'Volver',
+    confidential: 'Repositorio privado',
+    current: 'En curso',
+    responsibilities: 'Responsabilidades',
+    architecture: 'Arquitectura',
+    stack: 'Stack tecnológico',
+    category: 'Categoría',
+    technology: 'Tecnología',
+  },
+  en: {
+    back: 'Back',
+    confidential: 'Private repository',
+    current: 'Ongoing',
+    responsibilities: 'Responsibilities',
+    architecture: 'Architecture',
+    stack: 'Tech stack',
+    category: 'Category',
+    technology: 'Technology',
+  },
+};
+
+const t = i18n[lang];
+---
+
+<section class="container mx-auto px-4 py-14 sm:py-20">
+  <div class="max-w-3xl mx-auto">
+    <a href={backHref} class="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-indigo-300 transition-colors mb-8">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+      </svg>
+      {t.back}
+    </a>
+
+    <div class="flex flex-wrap items-center gap-2 mb-4">
+      {project.current && (
+        <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+          {t.current}
+        </span>
+      )}
+      {project.confidential && (
+        <span class="inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full bg-gray-800 text-gray-400 border border-gray-700">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"/>
+          </svg>
+          {t.confidential}
+        </span>
+      )}
+    </div>
+
+    <h1 class="text-3xl sm:text-4xl font-bold text-white leading-tight mb-3">{project.title}</h1>
+    <p class="text-indigo-400 font-semibold text-sm sm:text-base mb-6">{project.role}</p>
+
+    <div class="flex flex-wrap gap-2 mb-10 pb-10 border-b border-gray-800">
+      {project.technologies.map((tech) => (
+        <span class="flex items-center gap-1.5 text-xs bg-gray-800 text-gray-300 px-3 py-1.5 rounded-full border border-gray-700">
+          {tech.icon && (
+            <img src={`/icons/tech/${tech.icon}.svg`} alt={tech.name} width="14" height="14" class="w-3.5 h-3.5 object-contain" />
+          )}
+          {tech.name}
+        </span>
+      ))}
+    </div>
+
+    <div class="flex flex-col gap-10">
+      <p class="text-gray-300 text-sm sm:text-base leading-relaxed">{project.summary}</p>
+
+      <div>
+        <h2 class="text-xl font-bold text-white mb-4">{t.responsibilities}</h2>
+        <ul class="flex flex-col gap-2.5">
+          {project.responsibilities.map((r) => (
+            <li class="flex items-start gap-2.5 text-gray-300 text-sm sm:text-base leading-relaxed">
+              <svg class="w-5 h-5 shrink-0 text-indigo-400 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              {r}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {project.architecture && (
+        <div>
+          <h2 class="text-xl font-bold text-white mb-4">{t.architecture}</h2>
+
+          {project.diagram && (
+            <div class="rounded-xl border border-gray-700 overflow-x-auto mb-5 bg-[#0c0c14]">
+              <pre class="p-4 text-[11px] sm:text-xs leading-tight text-gray-300 inline-block min-w-full"><code>{project.diagram}</code></pre>
+            </div>
+          )}
+
+          <ul class="flex flex-col gap-2 pl-4 border-l border-gray-700">
+            {project.architecture.map((a) => (
+              <li class="text-gray-300 text-sm sm:text-base leading-relaxed before:content-['·'] before:mr-2 before:text-indigo-400">{a}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {project.stackTable && (
+        <div>
+          <h2 class="text-xl font-bold text-white mb-4">{t.stack}</h2>
+          <div class="rounded-xl border border-gray-700 overflow-hidden">
+            <table class="w-full text-sm text-left table-fixed">
+              <colgroup>
+                <col class="w-[35%]" />
+                <col class="w-[65%]" />
+              </colgroup>
+              <thead class="bg-gray-800 text-gray-400 text-xs uppercase tracking-wide">
+                <tr>
+                  <th class="px-4 py-3 font-semibold">{t.category}</th>
+                  <th class="px-4 py-3 font-semibold">{t.technology}</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-800">
+                {project.stackTable.map((row) => (
+                  <tr class="text-gray-300">
+                    <td class="px-4 py-3 font-semibold text-gray-200 align-top break-words">{row.category}</td>
+                    <td class="px-4 py-3 break-words">{row.tech}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+    </div>
+  </div>
+</section>

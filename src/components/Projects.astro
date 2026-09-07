@@ -8,10 +8,11 @@ interface Props {
 
 const { lang = 'es' } = Astro.props;
 const list = projects[lang];
+const detailBasePath = lang === 'en' ? '/en/experience' : '/experiencia';
 
 const i18n = {
-  es: { title: 'Proyectos', viewResponsibilities: 'Ver responsabilidades', viewSite: 'Ver sitio →', repo: 'Repositorio →', current: 'En curso' },
-  en: { title: 'Projects', viewResponsibilities: 'View responsibilities', viewSite: 'View site →', repo: 'Repository →', current: 'Ongoing' },
+  es: { title: 'Proyectos', viewResponsibilities: 'Ver responsabilidades', viewSite: 'Ver sitio →', repo: 'Repositorio →', current: 'En curso', viewDetail: 'Ver detalle →' },
+  en: { title: 'Projects', viewResponsibilities: 'View responsibilities', viewSite: 'View site →', repo: 'Repository →', current: 'Ongoing', viewDetail: 'View detail →' },
 };
 
 const t = i18n[lang];
@@ -59,8 +60,14 @@ const t = i18n[lang];
                     ))}
                 </div>
 
-                {(project.url || project.repo) && (
-                    <div class="flex gap-4">
+                {(project.url || project.repo || project.slug) && (
+                    <div class="flex flex-wrap gap-4">
+                        {project.slug && (
+                            <a href={`${detailBasePath}/${project.slug}`}
+                               class="text-sm text-indigo-400 hover:text-indigo-300 font-semibold transition-colors">
+                                {t.viewDetail}
+                            </a>
+                        )}
                         {project.url && (
                             <a href={project.url} target="_blank" rel="noopener noreferrer"
                                class="text-sm text-indigo-400 hover:text-indigo-300 font-semibold transition-colors">

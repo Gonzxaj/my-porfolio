@@ -9,6 +9,11 @@ export interface Technology {
   icon?: string;
 }
 
+export interface StackRow {
+  category: string;
+  tech: string;
+}
+
 export interface Project {
   title: string;
   role: string;
@@ -18,6 +23,14 @@ export interface Project {
   url?: string;
   repo?: string;
   current?: boolean;
+  /** Slug for a dedicated detail page at /experiencia/{slug} (es) or /en/experience/{slug} (en). */
+  slug?: string;
+  /** True when the codebase is a private client repo — shows a badge instead of a repo link. */
+  confidential?: boolean;
+  /** ASCII architecture diagram, rendered verbatim in a monospace block. */
+  diagram?: string;
+  architecture?: string[];
+  stackTable?: StackRow[];
 }
 
 const es: Project[] = [
@@ -76,6 +89,42 @@ const es: Project[] = [
       { name: "Linux", icon: "linux" },
     ],
     current: true,
+    slug: "transporte-boarini",
+    confidential: true,
+    diagram: `┌─────────┐      ┌──────────────────┐      ┌─────────────┐
+│  Nginx  │──────▶  Django + DRF    │──────▶  PostgreSQL │
+│ (proxy) │      │  (backend-t_boarini)     └─────────────┘
+└─────────┘      └──────┬───────────┘
+                         │                 ┌─────────────┐
+                         ├────────────────▶│    Redis    │
+                         │                 └──────┬──────┘
+                         │                        │
+                  ┌──────▼──────┐          ┌──────▼──────┐
+                  │ pdf-service │          │ Celery      │
+                  │  (FastAPI)  │          │ worker/beat │
+                  └─────────────┘          └─────────────┘`,
+    architecture: [
+      "Aplicación multi-servicio orquestada con Docker Compose, con configuraciones independientes para desarrollo local y producción.",
+      "API REST modular en Django + DRF, organizada por dominio de negocio: fleet (vehículos, choferes, viajes, mantenimientos), shipment (remitos y envíos), checking_account (cuenta corriente, pagos, comisiones e impuestos) y people/authentification (clientes y autenticación).",
+      "Cliente de integración con EasyTrack (API de rastreo GPS de la flota) como app independiente.",
+      "Celery (worker + beat) para procesamiento asíncrono y tareas programadas: liquidaciones, notificaciones, sincronización con el sistema de GPS y generación de reportes.",
+      "Microservicio de PDF separado en FastAPI, dedicado al procesamiento y extracción de datos de documentos (pypdf, opendataloader-pdf), desacoplado del backend principal para no bloquearlo con parsing pesado.",
+      "Reportes y comprobantes generados directamente desde HTML/CSS con WeasyPrint.",
+      "Nginx como reverse proxy con terminación SSL (Let's Encrypt en producción) y autenticación básica para el panel de monitoreo de tareas (Flower).",
+      "CI/CD con Bitbucket Pipelines, con conexión SSH al servidor de producción para automatizar el deploy.",
+    ],
+    stackTable: [
+      { category: "Backend", tech: "Python, Django, Django REST Framework" },
+      { category: "Microservicio PDF", tech: "Python, FastAPI" },
+      { category: "Tareas asíncronas", tech: "Celery (worker + beat), Flower" },
+      { category: "Base de datos", tech: "PostgreSQL" },
+      { category: "Cache / broker", tech: "Redis" },
+      { category: "Servidor web", tech: "Nginx, Gunicorn" },
+      { category: "Generación PDF", tech: "WeasyPrint, pypdf, opendataloader-pdf" },
+      { category: "Infraestructura", tech: "Docker, Docker Compose" },
+      { category: "CI/CD", tech: "Bitbucket Pipelines" },
+      { category: "Integraciones", tech: "EasyTrack (API de rastreo GPS)" },
+    ],
   },
   {
     title: "Tourviso",
@@ -232,6 +281,42 @@ const en: Project[] = [
       { name: "Linux", icon: "linux" },
     ],
     current: true,
+    slug: "transporte-boarini",
+    confidential: true,
+    diagram: `┌─────────┐      ┌──────────────────┐      ┌─────────────┐
+│  Nginx  │──────▶  Django + DRF    │──────▶  PostgreSQL │
+│ (proxy) │      │  (backend-t_boarini)     └─────────────┘
+└─────────┘      └──────┬───────────┘
+                         │                 ┌─────────────┐
+                         ├────────────────▶│    Redis    │
+                         │                 └──────┬──────┘
+                         │                        │
+                  ┌──────▼──────┐          ┌──────▼──────┐
+                  │ pdf-service │          │ Celery      │
+                  │  (FastAPI)  │          │ worker/beat │
+                  └─────────────┘          └─────────────┘`,
+    architecture: [
+      "Multi-service application orchestrated with Docker Compose, with independent configurations for local development and production.",
+      "Modular REST API in Django + DRF, organized by business domain: fleet (vehicles, drivers, trips, maintenance), shipment (waybills and shipments), checking_account (current accounts, payments, commissions and taxes) and people/authentification (clients and auth).",
+      "Dedicated integration client with EasyTrack (fleet GPS tracking API) as an independent app.",
+      "Celery (worker + beat) for asynchronous processing and scheduled tasks: settlements, notifications, GPS system sync and report generation.",
+      "Separate PDF microservice in FastAPI, dedicated to processing and extracting data from documents (pypdf, opendataloader-pdf), decoupled from the main backend so heavy parsing doesn't block it.",
+      "Reports and receipts generated directly from HTML/CSS with WeasyPrint.",
+      "Nginx as reverse proxy with SSL termination (Let's Encrypt in production) and basic auth for the task monitoring panel (Flower).",
+      "CI/CD with Bitbucket Pipelines, with SSH connection to the production server to automate deployment.",
+    ],
+    stackTable: [
+      { category: "Backend", tech: "Python, Django, Django REST Framework" },
+      { category: "PDF microservice", tech: "Python, FastAPI" },
+      { category: "Async tasks", tech: "Celery (worker + beat), Flower" },
+      { category: "Database", tech: "PostgreSQL" },
+      { category: "Cache / broker", tech: "Redis" },
+      { category: "Web server", tech: "Nginx, Gunicorn" },
+      { category: "PDF generation", tech: "WeasyPrint, pypdf, opendataloader-pdf" },
+      { category: "Infrastructure", tech: "Docker, Docker Compose" },
+      { category: "CI/CD", tech: "Bitbucket Pipelines" },
+      { category: "Integrations", tech: "EasyTrack (GPS tracking API)" },
+    ],
   },
   {
     title: "Tourviso",
