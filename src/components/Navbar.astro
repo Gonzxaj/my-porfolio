@@ -11,22 +11,29 @@ const t = useTranslations(lang);
 const otherLang = lang === 'es' ? 'en' : 'es';
 
 function getOtherLangUrl(pathname: string, currentLang: 'es' | 'en'): string {
-    const esProject = pathname.match(/^\/proyectos\/([^/]+)\/?$/);
+    const esProject = pathname.match(/^\/projects\/([^/]+)\/?$/);
     if (esProject) return `/en/projects/${esProject[1]}`;
 
     const enProject = pathname.match(/^\/en\/projects\/([^/]+)\/?$/);
-    if (enProject) return `/proyectos/${enProject[1]}`;
+    if (enProject) return `/projects/${enProject[1]}`;
 
-    const esExperience = pathname.match(/^\/experiencia\/([^/]+)\/?$/);
+    const esExperience = pathname.match(/^\/experience\/([^/]+)\/?$/);
     if (esExperience) return `/en/experience/${esExperience[1]}`;
 
     const enExperience = pathname.match(/^\/en\/experience\/([^/]+)\/?$/);
-    if (enExperience) return `/experiencia/${enExperience[1]}`;
+    if (enExperience) return `/experience/${enExperience[1]}`;
 
     return currentLang === 'es' ? '/en' : '/';
 }
 
 const otherLangUrl = getOtherLangUrl(Astro.url.pathname, lang);
+
+// The section anchors (#home, #about, ...) only exist on the homepage.
+// From any other page (e.g. a project/experience detail page) they must
+// point back to the homepage first, or clicking them does nothing.
+const homePath = lang === 'en' ? '/en' : '/';
+const isHome = lang === 'en' ? /^\/en\/?$/.test(Astro.url.pathname) : Astro.url.pathname === '/';
+const sectionHref = (id: string) => (isHome ? `#${id}` : `${homePath}#${id}`);
 ---
 
 <!-- Desktop: floating pill (left side) -->
@@ -36,25 +43,25 @@ const otherLangUrl = getOtherLangUrl(Astro.url.pathname, lang);
     </a>
     <ul class="navItems">
         <li>
-            <a href="#home" class="navLink">
+            <a href={sectionHref('home')} class="navLink">
                 <i style="--i:1"><Icon_Home/></i>
                 <span style="--g:1">{t('nav.home')}</span>
             </a>
         </li>
         <li>
-            <a href="#about" class="navLink">
+            <a href={sectionHref('about')} class="navLink">
                 <i style="--i:2"><Icon_User/></i>
                 <span style="--g:2">{t('nav.about')}</span>
             </a>
         </li>
         <li>
-            <a href="#projects" class="navLink">
+            <a href={sectionHref('projects')} class="navLink">
                 <i style="--i:3"><Icon_Project/></i>
                 <span style="--g:3">{t('nav.projects')}</span>
             </a>
         </li>
         <li>
-            <a href="#contact" class="navLink">
+            <a href={sectionHref('contact')} class="navLink">
                 <i style="--i:4"><Icon_Contact/></i>
                 <span style="--g:4">{t('nav.contact')}</span>
             </a>
@@ -72,19 +79,19 @@ const otherLangUrl = getOtherLangUrl(Astro.url.pathname, lang);
 
 <!-- Mobile: bottom navigation bar -->
 <nav aria-label="Navegación móvil" class="mobile-nav">
-    <a href="#home" class="mobile-nav-item">
+    <a href={sectionHref('home')} class="mobile-nav-item">
         <Icon_Home/>
         <span>{t('nav.home')}</span>
     </a>
-    <a href="#about" class="mobile-nav-item">
+    <a href={sectionHref('about')} class="mobile-nav-item">
         <Icon_User/>
         <span>{t('nav.about')}</span>
     </a>
-    <a href="#projects" class="mobile-nav-item">
+    <a href={sectionHref('projects')} class="mobile-nav-item">
         <Icon_Project/>
         <span>{t('nav.projects')}</span>
     </a>
-    <a href="#contact" class="mobile-nav-item">
+    <a href={sectionHref('contact')} class="mobile-nav-item">
         <Icon_Contact/>
         <span>{t('nav.contact')}</span>
     </a>

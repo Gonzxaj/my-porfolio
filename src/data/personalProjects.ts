@@ -1,7 +1,7 @@
 // ─────────────────────────────────────────────────────────────
 //  PROYECTOS PERSONALES
 //  Proyectos propios (side projects), separados de la experiencia
-//  laboral. Cada uno tiene una vista de detalle en /proyectos/{slug}
+//  laboral. Cada uno tiene una vista de detalle en /projects/{slug}
 //  (o /en/projects/{slug} en inglés).
 // ─────────────────────────────────────────────────────────────
 

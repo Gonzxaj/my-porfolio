@@ -8,7 +8,7 @@ interface Props {
 
 const { lang = 'es' } = Astro.props;
 const list = projects[lang];
-const detailBasePath = lang === 'en' ? '/en/experience' : '/experiencia';
+const detailBasePath = lang === 'en' ? '/en/experience' : '/experience';
 
 const i18n = {
   es: { title: 'Proyectos', viewResponsibilities: 'Ver responsabilidades', viewSite: 'Ver sitio →', repo: 'Repositorio →', current: 'En curso', viewDetail: 'Ver detalle →' },

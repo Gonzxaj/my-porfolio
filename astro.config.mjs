@@ -13,6 +13,10 @@ export default defineConfig({
     playformCompress(),
   ],
   output: 'static',
+  redirects: {
+    '/experiencia/[slug]': '/experience/[slug]',
+    '/proyectos/[slug]': '/projects/[slug]',
+  },
   i18n: {
     defaultLocale: 'es',
     locales: ['es', 'en'],

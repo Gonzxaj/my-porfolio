@@ -23,7 +23,7 @@ export interface Project {
   url?: string;
   repo?: string;
   current?: boolean;
-  /** Slug for a dedicated detail page at /experiencia/{slug} (es) or /en/experience/{slug} (en). */
+  /** Slug for a dedicated detail page at /experience/{slug} (es) or /en/experience/{slug} (en). */
   slug?: string;
   /** True when the codebase is a private client repo — shows a badge instead of a repo link. */
   confidential?: boolean;
@@ -183,6 +183,7 @@ const es: Project[] = [
   {
     title: "Vulcan (Bushfire Management Platform)",
     role: "Backend Developer (principal) + arquitectura de sistema",
+    current: true,
     summary:
       "Plataforma orientada a la gestión de incidentes de incendios forestales, integrando información geoespacial, notificaciones en tiempo real y herramientas operativas para la toma de decisiones. Permite centralizar datos de múltiples fuentes, optimizar flujos de trabajo y mejorar la coordinación entre equipos.",
     responsibilities: [
@@ -360,6 +361,7 @@ const en: Project[] = [
   {
     title: "Vulcan (Bushfire Management Platform)",
     role: "Backend Developer (Lead) + System Architecture",
+    current: true,
     summary:
       "Platform focused on bushfire incident management, integrating geospatial data, real-time notifications, and operational tools for decision-making. It centralizes information from multiple sources, optimizes workflows, and improves coordination between teams.",
     responsibilities: [
