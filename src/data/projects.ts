@@ -91,18 +91,6 @@ const es: Project[] = [
     current: true,
     slug: "transporte-boarini",
     confidential: true,
-    diagram: `┌─────────┐      ┌──────────────────┐      ┌─────────────┐
-│  Nginx  │──────▶  Django + DRF    │──────▶  PostgreSQL │
-│ (proxy) │      │  (backend-t_boarini)     └─────────────┘
-└─────────┘      └──────┬───────────┘
-                         │                 ┌─────────────┐
-                         ├────────────────▶│    Redis    │
-                         │                 └──────┬──────┘
-                         │                        │
-                  ┌──────▼──────┐          ┌──────▼──────┐
-                  │ pdf-service │          │ Celery      │
-                  │  (FastAPI)  │          │ worker/beat │
-                  └─────────────┘          └─────────────┘`,
     architecture: [
       "Aplicación multi-servicio orquestada con Docker Compose, con configuraciones independientes para desarrollo local y producción.",
       "API REST modular en Django + DRF, organizada por dominio de negocio: fleet (vehículos, choferes, viajes, mantenimientos), shipment (remitos y envíos), checking_account (cuenta corriente, pagos, comisiones e impuestos) y people/authentification (clientes y autenticación).",
@@ -149,8 +137,7 @@ const es: Project[] = [
       { name: "Celery", icon: "celery" },
       { name: "Docker", icon: "docker" },
       { name: "IA", icon: "ai" },
-    ],
-    current: true,
+    ]  
   },
   {
     title: "Sistema Interno de Gestión",
@@ -283,31 +270,17 @@ const en: Project[] = [
     current: true,
     slug: "transporte-boarini",
     confidential: true,
-    diagram: `┌─────────┐      ┌──────────────────┐      ┌─────────────┐
-│  Nginx  │──────▶  Django + DRF    │──────▶  PostgreSQL │
-│ (proxy) │      │  (backend-t_boarini)     └─────────────┘
-└─────────┘      └──────┬───────────┘
-                         │                 ┌─────────────┐
-                         ├────────────────▶│    Redis    │
-                         │                 └──────┬──────┘
-                         │                        │
-                  ┌──────▼──────┐          ┌──────▼──────┐
-                  │ pdf-service │          │ Celery      │
-                  │  (FastAPI)  │          │ worker/beat │
-                  └─────────────┘          └─────────────┘`,
     architecture: [
       "Multi-service application orchestrated with Docker Compose, with independent configurations for local development and production.",
       "Modular REST API in Django + DRF, organized by business domain: fleet (vehicles, drivers, trips, maintenance), shipment (waybills and shipments), checking_account (current accounts, payments, commissions and taxes) and people/authentification (clients and auth).",
       "Dedicated integration client with EasyTrack (fleet GPS tracking API) as an independent app.",
       "Celery (worker + beat) for asynchronous processing and scheduled tasks: settlements, notifications, GPS system sync and report generation.",
-      "Separate PDF microservice in FastAPI, dedicated to processing and extracting data from documents (pypdf, opendataloader-pdf), decoupled from the main backend so heavy parsing doesn't block it.",
       "Reports and receipts generated directly from HTML/CSS with WeasyPrint.",
       "Nginx as reverse proxy with SSL termination (Let's Encrypt in production) and basic auth for the task monitoring panel (Flower).",
       "CI/CD with Bitbucket Pipelines, with SSH connection to the production server to automate deployment.",
     ],
     stackTable: [
       { category: "Backend", tech: "Python, Django, Django REST Framework" },
-      { category: "PDF microservice", tech: "Python, FastAPI" },
       { category: "Async tasks", tech: "Celery (worker + beat), Flower" },
       { category: "Database", tech: "PostgreSQL" },
       { category: "Cache / broker", tech: "Redis" },
@@ -341,8 +314,7 @@ const en: Project[] = [
       { name: "Celery", icon: "celery" },
       { name: "Docker", icon: "docker" },
       { name: "AI", icon: "ai" },
-    ],
-    current: true,
+    ]
   },
   {
     title: "Internal Management System",
