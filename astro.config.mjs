@@ -13,6 +13,9 @@ export default defineConfig({
     playformCompress(),
   ],
   output: 'static',
+  build: {
+    inlineStylesheets: 'always',
+  },
   redirects: {
     '/experiencia/[slug]': '/experience/[slug]',
     '/proyectos/[slug]': '/projects/[slug]',
