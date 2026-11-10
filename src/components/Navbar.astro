@@ -110,7 +110,10 @@ const sectionHref = (id: string) => (isHome ? `#${id}` : `${homePath}#${id}`);
     @media (min-width: 768px) {
         .container-navbar {
             display: block;
-            top: 30%;
+            /* Row height shrinks on short screens so the open pill always fits. */
+            --nav-row: clamp(52px, 10vh, 86px);
+            top: 50%;
+            transform: translateY(-50%);
             height: 70px;
             width: 70px;
             background-color: white;
@@ -121,7 +124,8 @@ const sectionHref = (id: string) => (isHome ? `#${id}` : `${homePath}#${id}`);
     }
 
     .container-navbar.active {
-        height: 500px;
+        /* toggle + 5 nav items */
+        height: calc(70px + 5 * var(--nav-row));
     }
 
     .container-navbar.active .navItems {
@@ -183,7 +187,7 @@ const sectionHref = (id: string) => (isHome ? `#${id}` : `${homePath}#${id}`);
         display: flex;
         flex-direction: column;
         visibility: hidden;
-        padding-inline-start: 21px !important;
+        padding-inline-start: 0 !important;
     }
 
     .navLink {
@@ -200,9 +204,12 @@ const sectionHref = (id: string) => (isHome ? `#${id}` : `${homePath}#${id}`);
 
     li a i {
         position: relative;
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         font-size: 18px;
-        padding: 35px 5px;
+        height: var(--nav-row);
+        padding: 0 5px;
         width: 100%;
         text-align: center;
         transform: scale(0);
@@ -225,7 +232,9 @@ const sectionHref = (id: string) => (isHome ? `#${id}` : `${homePath}#${id}`);
         padding-left: 2rem;
         font-weight: 500;
         letter-spacing: 2px;
-        margin-left: 10px;
+        /* 10px gap + the 21px the list used to be indented, so labels clear the pill */
+        margin-left: 31px;
+        white-space: nowrap;
     }
 
     .container-navbar.active .navItems li a span {
@@ -280,8 +289,7 @@ const sectionHref = (id: string) => (isHome ? `#${id}` : `${homePath}#${id}`);
         flex: 1;
     }
 
-    .mobile-nav-item svg,
-    .mobile-nav-item :global(svg) {
+    .mobile-nav-item svg {
         width: 22px;
         height: 22px;
         fill: currentColor;
