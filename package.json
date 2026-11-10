@@ -10,24 +10,21 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/sitemap": "3.7.1",
-    "@tailwindcss/vite": "4.2.2",
-    "@fontsource-variable/onest": "^5.0.2",
-    "@playform/compress": "^0.0.3",
-    "astro": "6.0.8",
-    "astro-compressor": "^0.4.1",
-    "astro-icon": "^1.1.0",
-    "astro-robots-txt": "^1.0.0",
-    "tailwindcss": "4.2.2"
-  },
-  "overrides": {
-    "vite": "7.3.1"
+    "@astrojs/sitemap": "3.7.4",
+    "@tailwindcss/vite": "4.3.5",
+    "@fontsource-variable/onest": "5.3.1",
+    "@playform/compress": "0.2.5",
+    "astro": "7.4.10",
+    "astro-compressor": "2.0.1",
+    "astro-icon": "1.2.0",
+    "astro-robots-txt": "1.0.0",
+    "tailwindcss": "4.3.5"
   },
   "module": "index.ts",
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "1.4.4"
   },
   "peerDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "7.0.2"
   }
 }
