@@ -76,17 +76,19 @@ const es: PersonalProject[] = [
       'Workspace de Cargo con dos crates: battery-core (modelo, providers, monitor y config; testeable en Linux) y app (UI y APIs de Windows).',
       'Cada fabricante es un provider que implementa el trait BatteryProvider (discover / read_battery); agregar una marca es un archivo nuevo más una línea en el registro.',
       'Los protocolos HID se testean contra dispositivos simulados (FakeHid) detrás de un trait HidIo, sin hardware.',
-      'UI nativa con CreamUI (winit + tiny-skia por CPU, sin WebView), tray con tray-icon y toasts WinRT; HID con hidapi en backend Win32 puro Rust.',
+      'UI nativa con CreamUI de sammwy (winit + tiny-skia por CPU, sin WebView), tray con tray-icon y toasts WinRT; HID con hidapi en backend Win32 puro Rust.',
       'Un hilo de monitor hace polling en serie con timeouts por lectura y bloquea entre ciclos, así nunca hay lecturas simultáneas sobre un mismo dispositivo.',
       'Todo se compila desde Ubuntu con Docker: cross-compile a Windows, smoke tests de la UI con Wine y empaquetado MSIX con makemsix para la Store.',
     ],
     technologies: [
       { name: 'Rust', icon: 'rust' },
+      { name: 'CreamUI' },
       { name: 'Windows', icon: 'windows' },
       { name: 'Docker', icon: 'docker' },
     ],
     links: [
       { label: 'Ver en Microsoft Store', url: 'https://apps.microsoft.com/detail/9PM9RR5946W9', kind: 'external' },
+      { label: 'CreamUI (sammwy)', url: 'https://github.com/sammwyy/creamui', kind: 'external' },
     ],
   },
   {
@@ -378,17 +380,19 @@ const en: PersonalProject[] = [
       'Cargo workspace with two crates: battery-core (model, providers, monitor and config; testable on Linux) and app (UI and Windows APIs).',
       'Each vendor is a provider implementing the BatteryProvider trait (discover / read_battery); adding a brand is one new file plus one line in the registry.',
       'HID protocols are tested against simulated devices (FakeHid) behind a HidIo trait, no hardware needed.',
-      'Native UI with CreamUI (winit + CPU tiny-skia, no WebView), tray via tray-icon and WinRT toasts; HID via hidapi on its pure-Rust Win32 backend.',
+      'Native UI with sammwy\'s CreamUI (winit + CPU tiny-skia, no WebView), tray via tray-icon and WinRT toasts; HID via hidapi on its pure-Rust Win32 backend.',
       'A monitor thread polls devices serially with per-read timeouts and blocks between cycles, so there are never concurrent reads on the same device.',
       'Everything builds from Ubuntu with Docker: cross-compiling to Windows, UI smoke tests under Wine, and MSIX packaging with makemsix for the Store.',
     ],
     technologies: [
       { name: 'Rust', icon: 'rust' },
+      { name: 'CreamUI' },
       { name: 'Windows', icon: 'windows' },
       { name: 'Docker', icon: 'docker' },
     ],
     links: [
       { label: 'View on Microsoft Store', url: 'https://apps.microsoft.com/detail/9PM9RR5946W9', kind: 'external' },
+      { label: 'CreamUI (sammwy)', url: 'https://github.com/sammwyy/creamui', kind: 'external' },
     ],
   },
   {
