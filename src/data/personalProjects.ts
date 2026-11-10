@@ -55,6 +55,41 @@ export interface PersonalProject {
 
 const es: PersonalProject[] = [
   {
+    slug: 'lowbattery',
+    logo: '/icons/projects/lowbattery.webp',
+    title: 'LowBattery',
+    tagline: 'Monitor de batería de periféricos inalámbricos para Windows, escrito en Rust',
+    status: 'Publicado en Microsoft Store',
+    description: [
+      'App nativa para Windows 10/11 que muestra la batería de mouse, teclados, headsets y joysticks inalámbricos en un solo lugar, sin depender del software de cada fabricante.',
+      'Corre en un solo proceso: no instala servicios, no hace telemetría y no necesita permisos de administrador. Está publicada gratis en la Microsoft Store.',
+    ],
+    highlights: [
+      'Bluetooth estándar: lee el mismo nivel que muestra Ajustes de Windows.',
+      'Protocolos propietarios implementados a mano: Logitech HID++ 2.0 (receptores Unifying, Bolt, Lightspeed y conexión directa), SteelSeries (Aerox, Prime, Arctis) y Razer.',
+      'Fallback genérico para cualquier dispositivo HID que declare el uso estándar "Battery Strength".',
+      'Ícono en la bandeja con el nivel más bajo, toast de Windows cuando un dispositivo llega a batería baja y un widget flotante sin bordes con opacidad configurable.',
+      'Distingue dispositivo conectado, dormido (el receptor está pero el mouse no responde) y desconectado, y recuerda el último nivel conocido.',
+      'Log de diagnóstico que lista los periféricos no soportados con su VID/PID, para poder agregarlos.',
+    ],
+    architecture: [
+      'Workspace de Cargo con dos crates: battery-core (modelo, providers, monitor y config; testeable en Linux) y app (UI y APIs de Windows).',
+      'Cada fabricante es un provider que implementa el trait BatteryProvider (discover / read_battery); agregar una marca es un archivo nuevo más una línea en el registro.',
+      'Los protocolos HID se testean contra dispositivos simulados (FakeHid) detrás de un trait HidIo, sin hardware.',
+      'UI nativa con CreamUI (winit + tiny-skia por CPU, sin WebView), tray con tray-icon y toasts WinRT; HID con hidapi en backend Win32 puro Rust.',
+      'Un hilo de monitor hace polling en serie con timeouts por lectura y bloquea entre ciclos, así nunca hay lecturas simultáneas sobre un mismo dispositivo.',
+      'Todo se compila desde Ubuntu con Docker: cross-compile a Windows, smoke tests de la UI con Wine y empaquetado MSIX con makemsix para la Store.',
+    ],
+    technologies: [
+      { name: 'Rust', icon: 'rust' },
+      { name: 'Windows', icon: 'windows' },
+      { name: 'Docker', icon: 'docker' },
+    ],
+    links: [
+      { label: 'Ver en Microsoft Store', url: 'https://apps.microsoft.com/detail/9PM9RR5946W9', kind: 'external' },
+    ],
+  },
+  {
     slug: 'go-container',
     logo: '/icons/projects/go-container.webp',
     title: 'go-container',
@@ -321,6 +356,41 @@ volumes:
 ];
 
 const en: PersonalProject[] = [
+  {
+    slug: 'lowbattery',
+    logo: '/icons/projects/lowbattery.webp',
+    title: 'LowBattery',
+    tagline: 'Battery monitor for wireless peripherals on Windows, written in Rust',
+    status: 'Published on Microsoft Store',
+    description: [
+      'Native Windows 10/11 app that shows the battery of wireless mice, keyboards, headsets and controllers in one place, without relying on each vendor\'s software.',
+      'It runs as a single process: no services, no telemetry and no admin rights required. It is published for free on the Microsoft Store.',
+    ],
+    highlights: [
+      'Standard Bluetooth: reads the same level shown in Windows Settings.',
+      'Hand-implemented proprietary protocols: Logitech HID++ 2.0 (Unifying, Bolt, Lightspeed receivers and direct connection), SteelSeries (Aerox, Prime, Arctis) and Razer.',
+      'Generic fallback for any HID device that declares the standard "Battery Strength" usage.',
+      'Tray icon showing the lowest level, a Windows toast when a device runs low, and a borderless floating widget with configurable opacity.',
+      'Tells apart connected, asleep (receiver present but the mouse is not answering) and disconnected devices, and remembers the last known level.',
+      'Diagnostic log that lists unsupported peripherals with their VID/PID so they can be added.',
+    ],
+    architecture: [
+      'Cargo workspace with two crates: battery-core (model, providers, monitor and config; testable on Linux) and app (UI and Windows APIs).',
+      'Each vendor is a provider implementing the BatteryProvider trait (discover / read_battery); adding a brand is one new file plus one line in the registry.',
+      'HID protocols are tested against simulated devices (FakeHid) behind a HidIo trait, no hardware needed.',
+      'Native UI with CreamUI (winit + CPU tiny-skia, no WebView), tray via tray-icon and WinRT toasts; HID via hidapi on its pure-Rust Win32 backend.',
+      'A monitor thread polls devices serially with per-read timeouts and blocks between cycles, so there are never concurrent reads on the same device.',
+      'Everything builds from Ubuntu with Docker: cross-compiling to Windows, UI smoke tests under Wine, and MSIX packaging with makemsix for the Store.',
+    ],
+    technologies: [
+      { name: 'Rust', icon: 'rust' },
+      { name: 'Windows', icon: 'windows' },
+      { name: 'Docker', icon: 'docker' },
+    ],
+    links: [
+      { label: 'View on Microsoft Store', url: 'https://apps.microsoft.com/detail/9PM9RR5946W9', kind: 'external' },
+    ],
+  },
   {
     slug: 'go-container',
     logo: '/icons/projects/go-container.webp',
