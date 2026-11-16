@@ -202,6 +202,7 @@ volumes:
     description: [
       'Un solo binario en Go que expone una API JSON y sirve un dashboard web estático, sin dependencias obligatorias: sin base de datos, sin agentes externos, sin build de JS. Pensado para levantar en un VPS o homelab con un simple docker compose up -d y tener visibilidad inmediata del servidor.',
       'Todo es opt-in: si no se monta el socket de Docker, /var/log o /proc del host, esas features simplemente no muestran datos en vez de romper la aplicación.',
+      'Tiene además una app Android nativa (go-data-mobile, en Kotlin + Jetpack Compose) que muestra la misma información que el dashboard web leyendo la misma API HTTP, sin cambios en el servidor.',
     ],
     highlights: [
       'Métricas de CPU, RAM, disco, red, temperatura, contenedores Docker, intentos de login SSH y conexiones entrantes.',
@@ -209,6 +210,7 @@ volumes:
       'Persistencia de métricas en memoria por defecto (ventana corta), con InfluxDB opcional para historial más largo.',
       'Basic Auth opcional para proteger el dashboard y la API.',
       'Configuración 100% por variables de entorno — nada que editar en archivos para prender o apagar features.',
+      'App Android en Kotlin + Jetpack Compose: métricas en vivo con gráficos de historial, alarmas, eventos de seguridad y login con la misma cookie de sesión que el navegador.',
     ],
     architecture: [
       'Collectors propios (sin dependencias externas) que leen /proc, /sys, logs de auth y el socket de Docker.',
@@ -277,9 +279,11 @@ volumes:
       { name: 'Go', icon: 'go' },
       { name: 'Docker', icon: 'docker' },
       { name: 'JavaScript', icon: 'javascript' },
+      { name: 'Kotlin', icon: 'kotlin' },
     ],
     links: [
       { label: 'Ver en GitHub', url: 'https://github.com/Gonzxaj/go-data', kind: 'github' },
+      { label: 'App Android en GitHub', url: 'https://github.com/Gonzxaj/go-data-mobile', kind: 'github' },
       { label: 'Ver en Docker Hub', url: 'https://hub.docker.com/repository/docker/gonzxa/go-data/general', kind: 'dockerhub' },
     ],
   },
@@ -506,6 +510,7 @@ volumes:
     description: [
       'A single Go binary that exposes a JSON API and serves a static web dashboard, with no required dependencies: no database, no external agents, no JS build step. Meant to be spun up on a VPS or homelab with a simple docker compose up -d for instant server visibility.',
       'Everything is opt-in: if you don\'t mount the Docker socket, /var/log or the host\'s /proc, those features simply show no data instead of breaking the app.',
+      'It also has a native Android app (go-data-mobile, built with Kotlin + Jetpack Compose) that shows the same information as the web dashboard by reading the same HTTP API, with no server changes.',
     ],
     highlights: [
       'CPU, RAM, disk, network, temperature, Docker container, SSH login attempt and incoming connection metrics.',
@@ -513,6 +518,7 @@ volumes:
       'In-memory metrics persistence by default (short window), with optional InfluxDB for longer history.',
       'Optional Basic Auth to protect the dashboard and API.',
       '100% environment-variable configuration — nothing to edit in files to turn features on or off.',
+      'Kotlin + Jetpack Compose Android app: live metrics with history charts, alarms, security events, and login with the same session cookie the browser uses.',
     ],
     architecture: [
       'Dependency-free collectors that read /proc, /sys, auth logs and the Docker socket.',
@@ -581,9 +587,11 @@ volumes:
       { name: 'Go', icon: 'go' },
       { name: 'Docker', icon: 'docker' },
       { name: 'JavaScript', icon: 'javascript' },
+      { name: 'Kotlin', icon: 'kotlin' },
     ],
     links: [
       { label: 'View on GitHub', url: 'https://github.com/Gonzxaj/go-data', kind: 'github' },
+      { label: 'Android app on GitHub', url: 'https://github.com/Gonzxaj/go-data-mobile', kind: 'github' },
       { label: 'View on Docker Hub', url: 'https://hub.docker.com/repository/docker/gonzxa/go-data/general', kind: 'dockerhub' },
     ],
   },
