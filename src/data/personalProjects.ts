@@ -40,7 +40,7 @@ export interface PersonalProject {
   slug: string;
   title: string;
   tagline: string;
-  status: string;
+  status: string | string[];
   logo?: string;
   description: string[];
   highlights: string[];
@@ -58,11 +58,12 @@ const es: PersonalProject[] = [
     slug: 'lowbattery',
     logo: '/icons/projects/lowbattery.webp',
     title: 'LowBattery',
-    tagline: 'Monitor de batería de periféricos inalámbricos para Windows, escrito en Rust',
-    status: 'Publicado en Microsoft Store',
+    tagline: 'Monitor de batería de periféricos inalámbricos para Windows y Linux, escrito en Rust',
+    status: ['Publicado en Microsoft Store', 'Disponible para Linux'],
     description: [
-      'App nativa para Windows 10/11 que muestra la batería de mouse, teclados, headsets y joysticks inalámbricos en un solo lugar, sin depender del software de cada fabricante.',
+      'App nativa para Windows 10/11 y Linux que muestra la batería de mouse, teclados, headsets y joysticks inalámbricos en un solo lugar, sin depender del software de cada fabricante.',
       'Corre en un solo proceso: no instala servicios, no hace telemetría y no necesita permisos de administrador. Está publicada gratis en la Microsoft Store.',
+      'También hay versión para Linux. Está en la Snap Store de Ubuntu, pero ahí no funciona bien porque el confinamiento de snap no da acceso a los dispositivos HID; para usarla en Linux conviene bajar el .deb o el .tar.gz desde los releases de GitHub.',
     ],
     highlights: [
       'Bluetooth estándar: lee el mismo nivel que muestra Ajustes de Windows.',
@@ -88,6 +89,8 @@ const es: PersonalProject[] = [
     ],
     links: [
       { label: 'Ver en Microsoft Store', url: 'https://apps.microsoft.com/detail/9PM9RR5946W9', kind: 'external' },
+      { label: 'Descargar para Linux (.deb / .tar)', url: 'https://github.com/Gonzxaj/LowBattery/releases', kind: 'github' },
+      { label: 'Ver en Snap Store', url: 'https://snapcraft.io/lowbattery', kind: 'external' },
       { label: 'CreamUI (sammwy)', url: 'https://github.com/sammwyy/creamui', kind: 'external' },
     ],
   },
@@ -366,11 +369,12 @@ const en: PersonalProject[] = [
     slug: 'lowbattery',
     logo: '/icons/projects/lowbattery.webp',
     title: 'LowBattery',
-    tagline: 'Battery monitor for wireless peripherals on Windows, written in Rust',
-    status: 'Published on Microsoft Store',
+    tagline: 'Battery monitor for wireless peripherals on Windows and Linux, written in Rust',
+    status: ['Published on Microsoft Store', 'Available for Linux'],
     description: [
-      'Native Windows 10/11 app that shows the battery of wireless mice, keyboards, headsets and controllers in one place, without relying on each vendor\'s software.',
+      'Native Windows 10/11 and Linux app that shows the battery of wireless mice, keyboards, headsets and controllers in one place, without relying on each vendor\'s software.',
       'It runs as a single process: no services, no telemetry and no admin rights required. It is published for free on the Microsoft Store.',
+      'There is also a Linux build. It is on Ubuntu\'s Snap Store, but it does not work well from there because snap confinement does not grant access to HID devices; on Linux, download the .deb or .tar.gz from the GitHub releases instead.',
     ],
     highlights: [
       'Standard Bluetooth: reads the same level shown in Windows Settings.',
@@ -396,6 +400,8 @@ const en: PersonalProject[] = [
     ],
     links: [
       { label: 'View on Microsoft Store', url: 'https://apps.microsoft.com/detail/9PM9RR5946W9', kind: 'external' },
+      { label: 'Download for Linux (.deb / .tar)', url: 'https://github.com/Gonzxaj/LowBattery/releases', kind: 'github' },
+      { label: 'View on Snap Store', url: 'https://snapcraft.io/lowbattery', kind: 'external' },
       { label: 'CreamUI (sammwy)', url: 'https://github.com/sammwyy/creamui', kind: 'external' },
     ],
   },
